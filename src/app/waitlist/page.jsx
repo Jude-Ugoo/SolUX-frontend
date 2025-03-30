@@ -8,13 +8,14 @@ import logo from "@/assets/waitlist/logo.png";
 import flame from "@/assets/waitlist/flame.png";
 import frame from "@/assets/waitlist/Frame.png";
 import { addToWaitlist } from "@/api/waitlistApi";
+import toast from "react-hot-toast";
 
 const WaitlistPage = () => {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+  // const [error, setError] = useState(null);
+  // const [success, setSuccess] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,13 +23,17 @@ const WaitlistPage = () => {
 
     try {
       const newEntry = await addToWaitlist(email);
-      setSuccess("Successfully addeded to waitlist! We'll keep you updated.");
+      toast.success(
+        "Successfully addeded to waitlist! We'll keep you updated."
+      );
       setEmail("");
     } catch (error) {
       if (error.response?.status === 409) {
-        setError("This email is already registered for the waitlist.");
+        toast.error("This email is already registered for the waitlist.");
       } else {
-        setError(error.message || "Failed to join waitlist. Please try again.");
+        toast.error(
+          error.message || "Failed to join waitlist. Please try again."
+        );
       }
     } finally {
       setLoading(false);
@@ -80,7 +85,7 @@ const WaitlistPage = () => {
 
           {/* Heading - adjusted size */}
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-            UI/UX Design library and resources for crypto based applications
+            UI & UX design reference library for crypto based applications.
           </h1>
 
           {/* Description */}
@@ -98,7 +103,7 @@ const WaitlistPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
-                className="w-full px-6 py-4 rounded-lg bg-[#444444] border border-gray-200 text-lg"
+                className="w-full px-6 py-4 rounded-lg bg-[#444444] border border-gray-200 text-lg text-white placeholder:text-gray-400"
               />
               <button
                 className="w-full mt-4 bg-gray-900 text-white py-4 rounded-lg font-semibold transition-colors text-lg"
@@ -119,6 +124,7 @@ const WaitlistPage = () => {
             </div>
             <span>Launching Q2 2025</span>
             <div className="flex gap-2">
+              {/* <Icons.discord className="w-5 h-5" /> */}
               <a
                 href="https://x.com/SolUX_er"
                 target="_blank"
