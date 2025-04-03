@@ -5,17 +5,17 @@
 // import { Icons } from '@/components/Icons'
 // import Chip from '@/components/chips'
 // import Register from '@/components/Register'
-// import Header from '@/components/header'
 // import Seperator from '@/components/seperator'
-import { appsData, data } from '@/utils/data'
-import React, { useState } from 'react'
+// import { appsData, data } from '@/utils/data'
+// import React, { useState } from 'react'
 // import TogglePhone from '@/components/Buttons/TogglePhone'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import WaitlistPage from './waitlist/page'
+// import Header from '@/components/header'
 
 const Home = () => {
   // const [activeApp, setActiveApp] = useState(appsData[0])
-  const halfLength = Math.ceil(appsData.length / 2)
+  // const halfLength = Math.ceil(appsData.length / 2)
   // const firstHalf = appsData.slice(0, halfLength)
   // const secondHalf = appsData.slice(halfLength)
   // const router = useRouter()

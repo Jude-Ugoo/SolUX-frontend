@@ -10,7 +10,7 @@ export const addToWaitlist = async (email) => {
     } catch (error) {
         throw new Error(error.response?.data?.message || 'Failed to add to waitlist')
     }
-};
+}; 
 
 // Get all waitlist entries
 export const getWaitlist = async () => {

@@ -1,10 +1,8 @@
-"use client"
-
 import Filter from '@/components/Filter'
 import Hero from '@/components/Hero'
 import Header from '@/components/header'
 import Seperator from '@/components/seperator'
-import React, {useState} from 'react'
+import React from 'react'
 import logo from '@/assets/logos/solflare.png'
 import Image from 'next/image'
 import user1 from '@/assets/users/Ellipse 1.png'
