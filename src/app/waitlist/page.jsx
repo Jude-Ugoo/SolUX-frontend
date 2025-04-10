@@ -44,7 +44,7 @@ const WaitlistPage = () => {
     <main className="h-screen flex flex-col lg:flex-row justify-between items-center bg-white dark:bg-[#030103]">
       {/* Green banner - hidden on mobile and tablet */}
       <div
-        className="hidden lg:flex w-full lg:w-1/2 h-[96%] flex-col items-center justify-between bg-gradient-to-b
+        className="hidden lg:flex w-full lg:w-1/2 h-[97%] flex-col items-center justify-between bg-gradient-to-b
         from-green-950 to-black m-5 rounded-lg"
       >
         {/* Logo and Text */}
@@ -60,7 +60,7 @@ const WaitlistPage = () => {
       </div>
 
       {/* Right section - full width on mobile and tablet */}
-      <div className="min-h-screen flex flex-col items-center w-full lg:w-1/2 px-4 lg:px-8">
+      <div className="min-h-screen lg:h-screen flex flex-col items-center w-full lg:w-1/2 px-4 lg:px-8">
         <div className="flex justify-between items-center w-full px-4 sm:px-8 lg:px-20 py-6 lg:py-20">
           <Image
             src={logo}
@@ -161,10 +161,10 @@ const WaitlistPage = () => {
               </a>
             </div>
           </div>
-
-          {/* Blockchain Tags - Only visible on mobile and tablet */}
-          <div className="relative w-full max-w-md mx-auto mt-8 sm:mt-12 lg:hidden">
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+        </div>
+        {/* Blockchain Tags - Only visible on mobile and tablet */}
+        <div className="flex justify-center items-center relative w-full max-w-md mx-auto lg:hidden mt-4">
+          {/* <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
               <span className="px-3 py-1 text-xs sm:text-sm font-medium rounded-full bg-purple-600 text-white">
                 SOLANA
               </span>
@@ -186,8 +186,9 @@ const WaitlistPage = () => {
               <span className="px-3 py-1 text-xs sm:text-sm font-medium rounded-full bg-purple-500 text-white">
                 Arbitrum
               </span>
-            </div>
-          </div>
+            </div> */}
+
+          <Image src={frame} alt="frame" className="w-[100%] object-contain" />
         </div>
       </div>
     </main>

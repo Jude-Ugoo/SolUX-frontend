@@ -26,10 +26,10 @@ export const getWaitlist = async () => {
 
 //  Get a specific waitlist entry by ID
 export const getWaitlistEntry = async (id) => {
-      try {
+        try {
             const response = await axios.get(`${API_URL}/${id}`);
             return response.data;
-      } catch (error) {
+        } catch (error) {
             throw new Error(
             error.response?.data?.message || "Failed to fetch waitlist"
         );
@@ -39,10 +39,10 @@ export const getWaitlistEntry = async (id) => {
 
 //  Remove a specific waitlist entry by ID
 export const removeWaitlistEntry = async (id) => {
-      try {
+        try {
             const response = await axios.delete(`${API_URL}/${id}`);
             return response.data;
-      } catch (error) {
+        } catch (error) {
             throw new Error(
             error.response?.data?.message || "Failed to delete waitlist"
         );
