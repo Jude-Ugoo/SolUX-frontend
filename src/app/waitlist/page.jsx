@@ -44,7 +44,7 @@ const WaitlistPage = () => {
     <main className="h-screen flex flex-col lg:flex-row justify-between items-center bg-white dark:bg-[#030103]">
       {/* Green banner - hidden on mobile and tablet */}
       <div
-        className="hidden lg:flex w-full lg:w-1/2 h-[97%] flex-col items-center justify-between bg-gradient-to-b
+        className="hidden lg:flex w-full lg:w-1/2 h-[98%] flex-col items-center justify-between bg-gradient-to-b
         from-green-950 to-black m-5 rounded-lg"
       >
         {/* Logo and Text */}
@@ -56,12 +56,12 @@ const WaitlistPage = () => {
           </h1>
         </div>
 
-        <Image src={frame} alt="frame" className="w-[50%] object-contain" />
+        <Image src={frame} alt="frame" className="w-[70%] object-contain" />
       </div>
 
       {/* Right section - full width on mobile and tablet */}
-      <div className="min-h-screen lg:h-screen flex flex-col items-center w-full lg:w-1/2 px-4 lg:px-8">
-        <div className="flex justify-between items-center w-full px-4 sm:px-8 lg:px-20 py-6 lg:py-20">
+      <div className="h-screen lg:h-screen flex flex-col items-center w-full lg:w-1/2 px-4 lg:px-8">
+        <div className="flex justify-between items-center w-full px-2 pt-5 lg:pt-16 mb-10">
           <Image
             src={logo}
             alt="SolUX Logo"
@@ -111,12 +111,12 @@ const WaitlistPage = () => {
           </div>
 
           {/* Heading - adjusted size */}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-sans leading-tight dark:text-white">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-dm-sans leading-tight dark:text-white">
             UI & UX design reference library for crypto based applications.
           </h1>
 
           {/* Description */}
-          <p className="text-gray-600 dark:text-gray-300 font-sans font-semibold text-sm sm:text-base px-2 sm:px-4">
+          <p className="text-gray-600 dark:text-gray-300 font-Inter font-semibold text-sm sm:text-base px-2 sm:px-4">
             By joining our wait-list, you&apos;ll gain priority access to new
             features, founding member benefits, and special offers before anyone
             else.
@@ -163,32 +163,8 @@ const WaitlistPage = () => {
           </div>
         </div>
         {/* Blockchain Tags - Only visible on mobile and tablet */}
-        <div className="flex justify-center items-center relative w-full max-w-md mx-auto lg:hidden mt-4">
-          {/* <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-              <span className="px-3 py-1 text-xs sm:text-sm font-medium rounded-full bg-purple-600 text-white">
-                SOLANA
-              </span>
-              <span className="px-3 py-1 text-xs sm:text-sm font-medium rounded-full bg-blue-900 text-white">
-                ETHEREUM
-              </span>
-              <span className="px-3 py-1 text-xs sm:text-sm font-medium rounded-full bg-pink-400 text-white">
-                DEX
-              </span>
-              <span className="px-3 py-1 text-xs sm:text-sm font-medium rounded-full bg-indigo-600 text-white">
-                XION
-              </span>
-              <span className="px-3 py-1 text-xs sm:text-sm font-medium rounded-full bg-pink-500 text-white">
-                CONSUMER APPS
-              </span>
-              <span className="px-3 py-1 text-xs sm:text-sm font-medium rounded-full bg-blue-600 text-white">
-                BASE
-              </span>
-              <span className="px-3 py-1 text-xs sm:text-sm font-medium rounded-full bg-purple-500 text-white">
-                Arbitrum
-              </span>
-            </div> */}
-
-          <Image src={frame} alt="frame" className="w-[100%] object-contain" />
+        <div className="flex justify-center items-center relative w-full max-w-md mx-auto lg:hidden mt-4"> 
+         <Image src={frame} alt="frame" className="w-[100%] object-contain" />
         </div>
       </div>
     </main>
