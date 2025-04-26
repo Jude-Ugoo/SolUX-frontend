@@ -124,7 +124,7 @@ const WaitlistPage = () => {
                   </a>
 
                   <a
-                    href="https://x.com/SolUX_er"
+                    href="/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
@@ -133,20 +133,21 @@ const WaitlistPage = () => {
                   </a>
 
                   <a
-                    href="https://x.com/SolUX_er"
+                    href="https://likkles-organization.gitbook.io/solux"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                   >
-                    <Icons.twitter className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Icons.gitbook className="w-4 h-4 sm:w-5 sm:h-5" />
                   </a>
                 </div>
               </div>
 
-              <div className='border-b-2 mb-7'></div>
+              <div className="border-b-2 mb-7"></div>
 
-              <div className='font-dm-sans font-medium'>
-                Building or own a web3 project? Get featured in our design reference library
+              <div className="font-dm-sans font-medium">
+                Building or own a web3 project? Get featured in our design
+                reference library
               </div>
 
               <button
@@ -226,11 +227,10 @@ const WaitlistPage = () => {
               </div>
             </div>
           )}
-
         </div>
         {/* Blockchain Tags - Only visible on mobile and tablet */}
         <div className="flex justify-center items-center relative w-full max-w-md mx-auto lg:hidden mt-16">
-          <Image src={frame} alt="frame" className="w-[100%] object-contain" /> 
+          <Image src={frame} alt="frame" className="w-[100%] object-contain" />
         </div>
       </div>
     </main>
