@@ -8,9 +8,11 @@ import logo from "@/assets/waitlist/logo.png";
 import logo_2 from "@/assets/images/solux_logo.png";
 import flame from "@/assets/waitlist/flame.png";
 import frame from "@/assets/waitlist/Frame.svg";
-import { addToWaitlist } from "@/api/waitlistApi";
+// import { addToWaitlist } from "@/api/waitlistApi";
 import toast from "react-hot-toast";
 import { useTheme } from "next-themes";
+
+import supabase from "@/utils/supabaseClient";
 
 const WaitlistPage = () => {
   const [email, setEmail] = useState("");
@@ -23,23 +25,25 @@ const WaitlistPage = () => {
     setLoading(true);
 
     try {
-      const newEntry = await addToWaitlist(email);
-      toast.success(
-        "Successfully addeded to waitlist! We'll keep you updated."
-      );
-      setEmail("");
-      setSuccess(true);
-    } catch (error) {
-      if (error.response?.status === 409) {
-        toast.error("This email is already registered for the waitlist.");
-      } else {
-        toast.error(
-          error.message || "Failed to join waitlist. Please try again."
-        );
-      }
-    } finally {
-      setLoading(false);
-    }
+			const { data, error } = await supabase
+				.from("waitlist")
+				.insert([{ email }]);
+
+			if (error) throw error;
+
+			toast.success("Successfully added to waitlist! We'll keep you updated.");
+			setEmail("");
+			setSuccess(true);
+		} catch (error) {
+			if  (error.code === "23505") {
+					toast.error("This email is already registered for the waitlist.");
+			} else {
+					toast.error(
+					error.message || "Failed to join waitlist. Please try again.");
+			}
+		} finally {
+			setLoading(false);
+		}
   };
 
   return (
