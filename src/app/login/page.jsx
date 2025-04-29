@@ -63,19 +63,27 @@ export default function Login() {
       <div className="hidden lg:flex lg: ml-3 w-full lg:w-1/2 h-[98%] flex-col items-center justify-between bg-[#030103] rounded-lg">
         {/* Logo and Text */}
         <div className="text-center p-6 pt-60 rounded-lg">
-          <Image src={logo} alt="SolUX Logo" className="w-60 mx-auto mb-5" />
-          <h1 className="text-white text-2xl font-light px-28 font-inter">
+          <Image
+            src={logo}
+            alt="SolUX Logo"
+            className="w-[109px] h-[98.46px] mx-auto mb-5"
+          />
+          <h1 className="text-white text-[24px] font-[400] leading-[100%] space-x-0 px-28 font-inter">
             Save hours of research, understand web3 design patterns, discover
             the interface of real life crypto apps quicker
           </h1>
         </div>
 
-        <Image src={frame} alt="frame" className="w-[70%] object-contain" />
+        <Image
+          src={frame}
+          alt="frame"
+          className="w-[296px] h-[129.25px] object-contain"
+        />
       </div>
 
       {/* Right section - full width on mobile and tablet */}
       <div className="min-h-screen lg:h-screen flex flex-col items-center w-full lg:w-1/2 px-4 lg:px-8">
-        <div className="flex justify-end items-center w-full px-2 pt-2 lg:pt-5">
+        {/* <div className="flex justify-end items-center w-full px-2 pt-2 lg:pt-5">
           <div className="flex items-center gap-2 sm:gap-4 justify-center">
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -88,9 +96,9 @@ export default function Login() {
               )}
             </button>
           </div>
-        </div>
+        </div> */}
 
-        <div className="max-w-2xl w-full space-y-6 sm:space-y-8 text-center px-4 sm:px-6 mb-10">
+        <div className="max-w-2xl w-full space-y-6 sm:space-y-8 text-center px-4 sm:px-6 my-16">
           {/* Logo - adjusted size */}
           <div className="flex justify-center">
             <Image
@@ -102,14 +110,14 @@ export default function Login() {
 
           <div>
             {/* Heading - adjusted size */}
-            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-inter leading-tight dark:text-white mt-10 mb-5">
+            <h1 className="text-[32px] font-[700] sm:font-[600] sm:text-[32px] md:text-3xl lg:text-[32px] font-inter text-[#030103] dark:text-white mt-10 mb-5 leading-[40px]">
               Welcome back
             </h1>
 
             {/* Form section - adjusted padding and size */}
             <div className="space-y-4 w-full max-w-lg mx-auto px-2 sm:px-4 mb-5">
               <button
-                className="flex justify-center w-full mt-3 sm:mt-4 border text-gray-900  dark:bg-[#081a10] dark:text-[#E5E5E5] py-3 sm:py-4 rounded-md font-semibold transition-colors text-base sm:text-lg hover:bg-opacity-90"
+                className="flex justify-center w-full mt-3 sm:mt-4 border text-[#030103] dark:bg-[#081a10] dark:text-[#E5E5E5] py-3 sm:py-4 rounded-md font-[700] md:font-[600] text-[14px] md:text-[20px] leading-[20px] md:leading-[16px] space-x-0 transition-colors text-base sm:text-lg hover:bg-opacity-90"
                 type="submit"
                 disabled={loading}
               >
@@ -123,14 +131,14 @@ export default function Login() {
 
               <button
                 onClick={handleWalletConnect}
-                className="w-full mt-3 sm:mt-4 border text-gray-900 dark:bg-[#081a10] dark:text-[#E5E5E5] py-3 sm:py-4 rounded-md font-semibold transition-colors text-base sm:text-lg hover:bg-opacity-90"
+                className="w-full mt-3 sm:mt-4 border text-[#030103] dark:bg-[#081a10] dark:text-[#E5E5E5] py-3 sm:py-4 rounded-md font-[700] md:font-[600] text-[14px] md:text-[20px] leading-[20px] md:leading-[16px] space-x-0 transition-colors text-base sm:text-lg hover:bg-opacity-90"
                 type="submit"
                 disabled={loading}
               >
                 {publicKey ? (
                   publicKey.toBase58()
                 ) : (
-                  <>Continue with Solana Wallet </>
+                  <>Connect Your Solana Wallet </>
                 )}
               </button>
 
@@ -150,11 +158,11 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-md bg-[#EAEAEA] text-[#9f9e9e] text-base sm:text-lg placeholder:text-gray-[#9f9e9e] outline-none bg-transparent dark:text-white dark:placeholder:text-gray-400"
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-md bg-[#EAEAEA] text-[#999999] text-base sm:text-lg placeholder:text-[#999999] outline-none bg-transparent dark:text-white dark:placeholder:text-gray-400"
                 />
 
                 <button
-                  className="w-full mt-3 sm:mt-4 bg-[#002211] dark:bg-[#081a10] text-white py-3 sm:py-4 rounded-md font-sm transition-colors text-sm sm:text-lg hover:bg-opacity-90"
+                  className="w-full mt-3 sm:mt-4 bg-[#030103] dark:bg-[#030103] text-white py-3 sm:py-4 rounded-md font-sm transition-colors text-sm sm:text-lg hover:bg-opacity-90"
                   type="submit"
                   disabled={loading}
                 >
@@ -163,7 +171,7 @@ export default function Login() {
               </form>
             </div>
 
-            <span className="text-xs sm:text-sm text-[#000000] dark:text-gray-400">
+            <span className="text-[12px] font-[500] leading-[14px] space-x-0 text-[#000000] dark:text-gray-400">
               By continuing, you agree to SolUX’s 
               <span className="underline">Terms of Service</span> and{" "}
               <span className="underline">Policy Policy</span>.
@@ -171,7 +179,7 @@ export default function Login() {
           </div>
         </div>
 
-        <span className="text-[#111111] text-inter dark:text-gray-400 mt-16">
+        <span className="text-[14px] font-[500] leading-[14px] space-x-0 text-[#111111] text-inter dark:text-gray-400 mt-10">
           Don't have an account?{" "}
           <span
             className="cursor-pointer font-semibold"
