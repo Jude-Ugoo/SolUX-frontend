@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
 
-export default function Login() {
+export default function Signup() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -103,8 +103,14 @@ export default function Login() {
           <div>
             {/* Heading - adjusted size */}
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold font-inter leading-tight dark:text-white mt-10 mb-5">
-              Welcome back
+              Create your free account
             </h1>
+
+            {/* Description */}
+            <p className="text-[#444444] dark:text-gray-300 font-Inter font-[500] sm:text-base px-2 sm:px-4 mb-5">
+              Create your free account to search or filter through 50,000+
+              blockchain app screens.
+            </p>
 
             {/* Form section - adjusted padding and size */}
             <div className="space-y-4 w-full max-w-lg mx-auto px-2 sm:px-4 mb-5">
@@ -130,7 +136,7 @@ export default function Login() {
                 {publicKey ? (
                   publicKey.toBase58()
                 ) : (
-                  <>Continue with Solana Wallet </>
+                  <>Connect Your Solana Wallet </>
                 )}
               </button>
 
@@ -171,15 +177,15 @@ export default function Login() {
           </div>
         </div>
 
-        <span className="text-[#111111] text-inter dark:text-gray-400 mt-16">
-          Don't have an account?{" "}
+        <span className="text-[#111111] text-inter dark:text-gray-400 mt-10">
+          Already have an account?{" "}
           <span
             className="cursor-pointer font-semibold"
             onClick={() => {
-              router.push("/signup");
+              router.push("/login");
             }}
           >
-            Sign up{" "}
+            Log in
           </span>
         </span>
       </div>

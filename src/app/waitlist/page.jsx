@@ -25,25 +25,26 @@ const WaitlistPage = () => {
     setLoading(true);
 
     try {
-			const { data, error } = await supabase
-				.from("waitlist")
-				.insert([{ email }]);
+      const { data, error } = await supabase
+        .from("waitlist")
+        .insert([{ email }]);
 
-			if (error) throw error;
+      if (error) throw error;
 
-			toast.success("Successfully added to waitlist! We'll keep you updated.");
-			setEmail("");
-			setSuccess(true);
-		} catch (error) {
-			if  (error.code === "23505") {
-					toast.error("This email is already registered for the waitlist.");
-			} else {
-					toast.error(
-					error.message || "Failed to join waitlist. Please try again.");
-			}
-		} finally {
-			setLoading(false);
-		}
+      toast.success("Successfully added to waitlist! We'll keep you updated.");
+      setEmail("");
+      setSuccess(true);
+    } catch (error) {
+      if (error.code === "23505") {
+        toast.error("This email is already registered for the waitlist.");
+      } else {
+        toast.error(
+          error.message || "Failed to join waitlist. Please try again."
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -185,9 +186,9 @@ const WaitlistPage = () => {
 
               {/* Description */}
               <p className="text-gray-600 dark:text-gray-300 font-Inter font-semibold font-inter text-sm sm:text-base px-2 sm:px-4 mb-5">
-                By joining our wait-list, you&apos;ll gain priority access to
-                new features, founding member benefits, and special offers
-                before anyone else.
+                By joining our wait-list, you'll gain priority access to new
+                features, founding member benefits, and special offers before
+                anyone else.
               </p>
 
               {/* Form section - adjusted padding and size */}

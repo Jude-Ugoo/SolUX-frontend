@@ -1,27 +1,27 @@
 "use client"
 
-// import DesignCard from '@/components/DesignCard'
-// import Filter from '@/components/Filter'
-// import { Icons } from '@/components/Icons'
-// import Chip from '@/components/chips'
-// import Register from '@/components/Register'
-// import Seperator from '@/components/seperator'
-// import { appsData, data } from '@/utils/data'
-// import React, { useState } from 'react'
-// import TogglePhone from '@/components/Buttons/TogglePhone'
-// import { useRouter } from 'next/navigation'
-import WaitlistPage from './waitlist/page'
-// import Header from '@/components/header'
+import DesignCard from '@/components/DesignCard'
+import Filter from '@/components/Filter'
+import { Icons } from '@/components/Icons'
+import Chip from '@/components/chips'
+import Register from '@/components/Register'
+import Seperator from '@/components/seperator'
+import { appsData, data } from '@/utils/data'
+import React, { useState } from 'react'
+import TogglePhone from '@/components/Buttons/TogglePhone'
+import { useRouter } from 'next/navigation'
+// import WaitlistPage from './waitlist/page'
+import Header from '@/components/header'
 
 const Home = () => {
-  // const [activeApp, setActiveApp] = useState(appsData[0])
-  // const halfLength = Math.ceil(appsData.length / 2)
-  // const firstHalf = appsData.slice(0, halfLength)
-  // const secondHalf = appsData.slice(halfLength)
-  // const router = useRouter()
+  const [activeApp, setActiveApp] = useState(appsData[0])
+  const halfLength = Math.ceil(appsData.length / 2)
+  const firstHalf = appsData.slice(0, halfLength)
+  const secondHalf = appsData.slice(halfLength)
+  const router = useRouter()
   return (
     <div className='w-full select-none bg-white min-h-[100vh]'>
-      {/* <Header/>
+      <Header/>
       <Seperator />
       <div className='w-full px-[5%] mt-4'>
         <Filter />
@@ -57,9 +57,9 @@ const Home = () => {
           </div>
         </div>
         <Register />
-      </div> */}
+      </div>
 
-      <WaitlistPage/>
+      {/* <WaitlistPage/> */}
     </div>
   )
 }
