@@ -11,17 +11,16 @@ import { Icons } from "@/components/Icons";
 import logo from "@/assets/waitlist/logo.png";
 import logo_2 from "@/assets/images/solux_logo.png";
 import frame from "@/assets/waitlist/Frame.svg";
-// import { addToWaitlist } from "@/api/waitlistApi";
 import toast from "react-hot-toast";
-import { useTheme } from "next-themes";
+// import { useTheme } from "next-themes";
 import { useRouter } from "next/navigation";
+import supabase from "@/utils/supabaseClient";
 
 export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const { theme, setTheme } = useTheme();
   const { publicKey } = useWallet();
 
   useEffect(() => {
@@ -35,25 +34,42 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase
-        .from("waitlist")
-        .insert([{ email }]);
+      const { data, error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/verification`,
+          data: {
+            isNewUser: false, // To differentiate between login and signup
+          },
+        },
+      });
 
       if (error) throw error;
 
-      toast.success("Successfully added to waitlist! We'll keep you updated.");
+      toast.success("Check your email for the verification code!");
       setEmail("");
-      setSuccess(true);
+      router.push("/verification?email=" + encodeURIComponent(email));
     } catch (error) {
-      if (error.code === "23505") {
-        toast.error("This email is already registered for the waitlist.");
-      } else {
-        toast.error(
-          error.message || "Failed to join waitlist. Please try again."
-        );
-      }
+      toast.error(
+        error.message || "Failed to send verification code. Please try again."
+      );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/verification`,
+        },
+      });
+
+      if (error) throw error;
+    } catch (error) {
+      toast.error("Failed to sign in with Google. Please try again.");
     }
   };
 
@@ -117,8 +133,9 @@ export default function Login() {
             {/* Form section - adjusted padding and size */}
             <div className="space-y-4 w-full max-w-lg mx-auto px-2 sm:px-4 mb-5">
               <button
-                className="flex justify-center w-full mt-3 sm:mt-4 border text-[#030103] dark:bg-[#081a10] dark:text-[#E5E5E5] py-3 sm:py-4 rounded-md font-[700] md:font-[600] text-[14px] md:text-[20px] leading-[20px] md:leading-[16px] space-x-0 transition-colors text-base sm:text-lg hover:bg-opacity-90"
-                type="submit"
+                onClick={handleGoogleSignIn}
+                className="flex justify-center w-full mt-3 sm:mt-4 border text-[#030103] dark:bg-[#081a10] dark:text-[#E5E5E5] h-[58px] py-3 sm:py-4 rounded-md font-[700] md:font-[600] text-[14px] md:text-[20px] leading-[20px] md:leading-[16px] space-x-0 transition-colors text-base sm:text-lg hover:bg-opacity-90"
+                type="button"
                 disabled={loading}
               >
                 <Image
@@ -131,7 +148,7 @@ export default function Login() {
 
               <button
                 onClick={handleWalletConnect}
-                className="w-full mt-3 sm:mt-4 border text-[#030103] dark:bg-[#081a10] dark:text-[#E5E5E5] py-3 sm:py-4 rounded-md font-[700] md:font-[600] text-[14px] md:text-[20px] leading-[20px] md:leading-[16px] space-x-0 transition-colors text-base sm:text-lg hover:bg-opacity-90"
+                className="w-full mt-3 sm:mt-4 border text-[#030103] dark:bg-[#081a10] dark:text-[#E5E5E5] h-[58px] py-3 sm:py-4 rounded-md font-[700] md:font-[600] text-[14px] md:text-[20px] leading-[20px] md:leading-[16px] space-x-0 transition-colors text-base sm:text-lg hover:bg-opacity-90"
                 type="submit"
                 disabled={loading}
               >
@@ -158,11 +175,11 @@ export default function Login() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-md bg-[#EAEAEA] text-[#999999] text-base sm:text-lg placeholder:text-[#999999] outline-none bg-transparent dark:text-white dark:placeholder:text-gray-400"
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-md bg-[#EAEAEA] text-[#030103] text-base sm:text-lg h-[58px] placeholder:text-[#999999] outline-none dark:text-white dark:placeholder:text-gray-400"
                 />
 
                 <button
-                  className="w-full mt-3 sm:mt-4 bg-[#030103] dark:bg-[#030103] text-white py-3 sm:py-4 rounded-md font-sm transition-colors text-sm sm:text-lg hover:bg-opacity-90"
+                  className="w-full mt-3 sm:mt-4 bg-[#030103] dark:bg-[#030103] text-white py-3 sm:py-4 rounded-md h-[58px] font-sm transition-colors text-sm sm:text-lg hover:bg-opacity-90"
                   type="submit"
                   disabled={loading}
                 >
