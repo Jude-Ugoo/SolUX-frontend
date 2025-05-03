@@ -1,35 +1,49 @@
-import React from 'react'
-import Image from 'next/image'
-import { Icons } from './Icons'
-import { useRouter } from 'next/navigation'
+'use client';
 
-const DesignCard = ({design}) => {
+import React from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+
+const DesignCard = ({ design }) => {
   const router = useRouter();
+
   return (
-    <div onClick={() => router.push(`/design`)} className='bg-gray-300 cursor-pointer rounded-md flex flex-col items-center min-w-[256px] py-2 px-4'>
-      <div className='bg-gray-200 flex items-center gap-1.5 rounded-xl mix-blend-multiply py-1 px-2'>
-        <p className='bg-white px-1.5 py-0.5 rounded-xl text-[8.66px] font-medium text-gray-700'>New Feature</p>
-        <p className='text-gray-700 font-medium text-[8.66px]'>We’ve just released a new feature</p>
+    <div className="flex flex-col rounded-xl">
+      <div
+        onClick={() => router.push(`/design`)}
+        className="bg-[#FAFAFA] cursor-pointer rounded-xl flex items-center justify-center w-full py-6"
+      >
+        <div className="mt-3">
+          <Image
+            className="w-full h-auto object-cover"
+            alt={design.name}
+            src={design.image}
+			wdth={300}
+			height={300}
+          />
+        </div>
       </div>
-      <div className='mt-3'>
-        <Image className='rounded-lg w-[200px] h-auto' sizes="100vw" width={200} height={0} alt={design.name} src={design.image} />
-        <div className='flex items-center justify-between w-full mt-2'>
-          <div className='flex items-center gap-2'>
-            <Image src={design.logo} alt={design.name} width={28} height={28} />
-            <p className='text-black-100 text-[8.66px] font-medium'>{design.name}</p>
-          </div>
-          <div className='flex items-center gap-2'>
-            <div className='w-[30px] h-[30px] flex items-center justify-center bg-gray-100 rounded-md cursor-pointer'>
-              <Icons.bookmark />
-            </div>
-            <div className='w-[30px] h-[30px] flex items-center justify-center bg-gray-100 rounded-md cursor-pointer'>
-              <Icons.download />
-            </div>
-          </div>
+
+	  <div className="flex items-center gap-3">
+        {/* App Icon */}
+        <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
+          <Image
+            src={design.icon}
+            alt={`${design.name} Icon`}
+            width={40}
+            height={40}
+            className="object-contain"
+          />
+        </div>
+
+        {/* Name + Description */}
+        <div className="flex flex-col">
+          <h3 className="font-semibold text-gray-900">{design.name}</h3>
+          <p className="text-sm text-gray-700">{design.description}</p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DesignCard
+export default DesignCard;

@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import logo from "@/assets/images/logo.png";
 import Avatar from "@/assets/images/Avatar.png";
 import { Icons } from "@/components/Icons";
+import logo_2 from "@/assets/images/solux_logo.png";
 import ProfileDropdown from "./Dropdowns/Profile";
 import Resources from "./Dropdowns/Resources";
 import { useRouter } from "next/navigation";
@@ -13,6 +14,7 @@ import {
   WalletConnectButton,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
+import Search from "./Search";
 
 const Header = ({ appPage }) => {
   const [showProfile, setShowProfile] = useState(false);
@@ -22,48 +24,53 @@ const Header = ({ appPage }) => {
 
   return (
     <nav className="w-full flex items-center justify-between px-[4%] py-6">
-      <div className="flex items-center gap-10">
+      <div className="flex items-center justify-center gap-10">
         <div
           onClick={() => router.push("/")}
-          className="flex cursor-pointer items-center gap-2"
+          className="flex cursor-pointer items-center"
         >
-          <Image src={logo} alt="logo" width={50} height={50} />
-          <h4 className="text-black text-xl font-semibold">SoLUX</h4>
+          <Image
+            src={logo_2}
+            alt="SolUX Logo"
+            className="w-[184px] object-contain"
+          />
         </div>
-        <ul className="flex items-center gap-10">
-          <li className="text-gray-600 cursor-pointer text-base font-semibold">
-            Home
-          </li>
-          <li className="flex cursor-pointer items-center gap-2 text-gray-600 text-base font-semibold">
-            <span>Products</span>
+        <ul className="flex items-center justify-center gap-10 mt-1">
+          <li className="flex cursor-pointer items-center gap-2 text-[#121212] text-[22px] font-[500] leading-[32px] font-inter">
+            <span>Product</span>
             <Icons.chevron_down />
           </li>
-          <li className="relative cursor-pointer">
-            <div
-              onClick={() => setShowResources(!showResources)}
-              className="flex items-center gap-2"
-            >
-              <span className=" text-gray-600 text-base font-semibold">
-                Resources
-              </span>
-              {showResources ? <Icons.chevron_up /> : <Icons.chevron_down />}
-            </div>
-            {showResources && <Resources />}
-          </li>
-          <li className="text-gray-600 cursor-pointer text-base font-semibold">
-            Design Patterns
-          </li>
+          <li className="flex cursor-pointer items-center gap-2 text-[#121212] text-[22px] font-[500] leading-[32px] font-inter">
+            <span>Reading</span>
+            <Icons.chevron_down />
+          </li>{" "}
+          {/* <li className="relative cursor-pointer">
+				<div
+				onClick={() => setShowResources(!showResources)}
+				className="flex items-center gap-2"
+				>
+				<span className=" text-gray-600 text-base font-semibold">
+					Resources
+				</span>
+				{showResources ? <Icons.chevron_up /> : <Icons.chevron_down />}
+				</div>
+				{showResources && <Resources />}
+			</li> */}
         </ul>
       </div>
+
+      <Search otherStyles={"bg-[#F6F6F6] w-[500px] mx-10"} />
+
       <div className="flex items-center gap-6">
         <button
           onClick={() => router.push("/price")}
-          className="flex items-center gap-2 bg-primary-100 justify-center rounded-lg py-2.5 px-4 border border-gray-400 shadow-custom"
+          className="flex items-center gap-2 bg-[#121212] justify-center rounded-full py-2.5 px-4 border shadow-custom"
         >
-          <Icons.zap />
-          <span className="text-white font-semibold text-sm">Upgrade now</span>
+          <span className="text-white font-[500] text-[12px] leading-[14px]">
+            Submit App
+          </span>
         </button>
-        {!appPage && (
+        {/* {!appPage && (
           <>
             <div>
               <Icons.bookmark />
@@ -75,17 +82,15 @@ const Header = ({ appPage }) => {
               </span>
             </div>
           </>
-        )}
-        {appPage && (
-          <>
-            <div>
-              <Icons.settings size={20} color="#667085" />
-            </div>
-            <div className="relative cursor-pointer tooltip">
-              <Icons.notification />
-            </div>
-          </>
-        )}
+        )} */}
+
+        <div>
+          <Icons.bookmark size={20} color="#667085" />
+        </div>
+        {/* <div className="relative cursor-pointer tooltip">
+          <Icons.notification />
+        </div> */}
+
         {publicKey ? (
           <div className="cursor-pointer relative">
             <div

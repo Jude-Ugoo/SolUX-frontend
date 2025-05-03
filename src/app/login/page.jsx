@@ -23,9 +23,26 @@ export default function Login() {
   const [success, setSuccess] = useState(false);
   const { publicKey } = useWallet();
 
+//   useEffect(() => {
+//     // Check if user is already authenticated
+//     const { data: authListener } = supabase.auth.onAuthStateChange(
+//       (event, session) => {
+//         if (session?.user?.email_confirmed_at) {
+//           router.push("/onboarding");
+//         }
+//       }
+//     );
+
+//     return () => {
+//       if (authListener && authListener.unsubscribe) {
+//         authListener.unsubscribe();
+//       }
+//     };
+//   }, [router]);
+
   useEffect(() => {
     if (publicKey) {
-      redirect("/");
+      router.push("/");
     }
   }, [publicKey]);
 
@@ -37,18 +54,16 @@ export default function Login() {
       const { data, error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: `${window.location.origin}/verification`,
-          data: {
-            isNewUser: false, // To differentiate between login and signup
-          },
+          shouldCreateUser: false, // Prevent creating new users through login
         },
       });
 
       if (error) throw error;
 
       toast.success("Check your email for the verification code!");
-      setEmail("");
-      router.push("/verification?email=" + encodeURIComponent(email));
+      router.push(
+        `/verification?email=${encodeURIComponent(email)}&source=login`
+      );
     } catch (error) {
       toast.error(
         error.message || "Failed to send verification code. Please try again."
@@ -63,7 +78,7 @@ export default function Login() {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/verification`,
+          redirectTo: `${window.location.origin}/onboarding`,
         },
       });
 
@@ -98,7 +113,7 @@ export default function Login() {
       </div>
 
       {/* Right section - full width on mobile and tablet */}
-      <div className="min-h-screen lg:h-screen flex flex-col items-center w-full lg:w-1/2 px-4 lg:px-8">
+      <div className="min-h-screen lg:h-screen flex flex-col justify-center items-center w-full lg:w-1/2 px-4 lg:px-8">
         {/* <div className="flex justify-end items-center w-full px-2 pt-2 lg:pt-5">
           <div className="flex items-center gap-2 sm:gap-4 justify-center">
             <button

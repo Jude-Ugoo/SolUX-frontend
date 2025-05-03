@@ -33,7 +33,7 @@ const FilterBy = ({closeCard}) => {
         <Icons.close size={24} />
        </div>
       </div>
-      <Search otherStyles={'w-full my-8'} />
+      <Search otherStyles={'w-full my-8 bg-red-500'} />
       <div className='mt-8 flex flex-col gap-8'>
         {
           filterOptions.map((option, i) => (

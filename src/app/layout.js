@@ -24,10 +24,10 @@ export default function RootLayout({ children }) {
   return (
     <html className={`${inter.className} ${dmSans.variable}`} lang="en">
       <body>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        {/* <ThemeProvider attribute="class" defaultTheme="light"> */}
           <Toaster position="top-center" />
           <AppWalletProvider>{children}</AppWalletProvider>
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );

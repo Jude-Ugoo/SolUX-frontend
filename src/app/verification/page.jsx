@@ -14,56 +14,55 @@ import supabase from "@/utils/supabaseClient";
 
 export default function Verification() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const { publicKey } = useWallet();
-  const [isFromLogin, setIsFromLogin] = useState(false);
   const [userEmail, setUserEmail] = useState("");
+  const [isFromLogin, setIsFromLogin] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Get email from URL query parameter
+    // Get email and source from URL query parameters
     const params = new URLSearchParams(window.location.search);
+    const source = params.get("source");
     const emailParam = params.get("email");
+
+    if (source) {
+      setIsFromLogin(source === "login");
+    }
+
     if (emailParam) {
       setUserEmail(decodeURIComponent(emailParam));
     }
   }, []);
 
+  // Check authentication state
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (event === "SIGNED_IN" && session?.user?.email_confirmed_at) {
-          // Redirect to home page if email is verified
-          router.push("/onboarding");
-        } else if (event === "SIGNED_IN") {
-          // Stay on verification page if email is not verified
-          toast.info("Please verify your email to continue.");
-        }
-      }
-    );
-
-    return () => {
-      if (authListener && authListener.unsubscribe) {
-        authListener.unsubscribe();
+    const checkAuth = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (session?.user?.email_confirmed_at) {
+        setIsAuthenticated(true);
+        router.push("/onboarding");
       }
     };
+
+    checkAuth();
   }, [router]);
 
+  // Prevent direct access to verification page
   useEffect(() => {
-    // Check if the user came from login or signup using the referrer
-    const referrer = document.referrer;
-    setIsFromLogin(referrer.includes("/login"));
-  }, []);
+    if (!userEmail && !isAuthenticated) {
+      router.push("/login");
+    }
+  }, [userEmail, isAuthenticated, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.verifyOtp({
+      const { data, error } = await supabase.auth.verifyOtp({
         email: userEmail,
         token: otp,
         type: "email",
@@ -71,10 +70,14 @@ export default function Verification() {
 
       if (error) throw error;
 
+      // If verification is successful
       toast.success("Email verified successfully!");
-      router.push("/onboarding"); // Or your desired authenticated route
+      setIsAuthenticated(true);
+      router.push("/onboarding");
     } catch (error) {
-      toast.error(error.message || "Verification failed. Please try again.");
+      toast.error(
+        error.message || "Invalid verification code. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -82,9 +85,8 @@ export default function Verification() {
 
   return (
     <main className="min-h-[100vh] lg:h-screen flex flex-col lg:flex-row justify-between items-center bg-white dark:bg-[#030103]">
-      {/* Green banner - hidden on mobile and tablet */}
-      <div className="hidden lg:flex lg: ml-3 w-full lg:w-1/2 h-[98%] flex-col items-center justify-between bg-[#030103] rounded-lg">
-        {/* Logo and Text */}
+      {/* Left section with banner */}
+      <div className="hidden lg:flex lg:ml-3 w-full lg:w-1/2 h-[98%] flex-col items-center justify-between bg-[#030103] rounded-lg">
         <div className="text-center p-6 pt-60 rounded-lg">
           <Image
             src={logo}
@@ -104,10 +106,9 @@ export default function Verification() {
         />
       </div>
 
-      {/* Right section - full width on mobile and tablet */}
-      <div className="min-h-screen lg:h-screen flex flex-col items-center w-full lg:w-1/2 px-4 lg:px-8">
+      {/* Right section */}
+      <div className="min-h-screen lg:h-screen flex flex-col justify-center items-center w-full lg:w-1/2 px-4 lg:px-8">
         <div className="max-w-2xl w-full space-y-6 sm:space-y-8 text-center px-4 sm:px-6 my-16">
-          {/* Logo - adjusted size */}
           <div className="flex justify-center">
             <Image
               src={logo_2}
@@ -117,17 +118,14 @@ export default function Verification() {
           </div>
 
           <div>
-            {/* Heading - adjusted size */}
             <h1 className="text-[32px] font-[700] sm:font-[600] sm:text-[32px] md:text-3xl lg:text-[32px] font-inter text-[#030103] dark:text-white mt-10 mb-5 leading-[100%] md:leading-[40px] space-x-0">
               {isFromLogin ? "Welcome back" : "Create your SolUX account"}
             </h1>
 
-            {/* Description */}
             <p className="text-[#444444] text-[12px] md:text-[24px] dark:text-gray-300 font-Inter font-[400] md:font-[500] leading-[16px] md:leading-[32px] px-2 sm:px-4 mb-5 mx-10">
-              We sent a temporary login code to {userEmail}. Not you?
+              We sent a verification code to {userEmail}. Not you?
             </p>
 
-            {/* Form section - adjusted padding and size */}
             <div className="space-y-4 w-full max-w-lg mx-auto px-2 sm:px-4 mb-5">
               <form onSubmit={handleSubmit}>
                 <input
@@ -135,7 +133,7 @@ export default function Verification() {
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   placeholder="Enter verification code"
-                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-md h-[58px] bg-[#EAEAEA] text-[#999999] text-base sm:text-lg placeholder:text-[#999999] outline-none dark:text-white dark:placeholder:text-gray-400"
+                  className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-md h-[58px] bg-[#EAEAEA] text-[#030103] text-base sm:text-lg placeholder:text-[#999999] outline-none dark:text-white dark:placeholder:text-gray-400"
                 />
 
                 <button
@@ -147,12 +145,6 @@ export default function Verification() {
                 </button>
               </form>
             </div>
-
-            <span className="text-[12px] font-[500] leading-[14px] space-x-0 text-[#000000] dark:text-gray-400">
-              By continuing, you agree to SolUX's{" "}
-              <span className="underline">Terms of Service</span> and{" "}
-              <span className="underline">Privacy Policy</span>.
-            </span>
           </div>
         </div>
       </div>

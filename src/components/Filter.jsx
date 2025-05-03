@@ -31,7 +31,6 @@ const Filter = () => {
         <li className='py-2 px-3 text-base font-semibold text-gray-700'>Extensions</li>
         <li onClick={() => router.push('/waitlist')} className='py-2 px-3 text-base font-semibold text-gray-700 cursor-pointer'>Waitlist</li>
       </ul>
-      <Search otherStyles={'basis-1/2'} />
     </div>
   )
 }
