@@ -23,28 +23,28 @@ export default function Login() {
   const [success, setSuccess] = useState(false);
   const { publicKey } = useWallet();
 
-//   useEffect(() => {
-//     // Check if user is already authenticated
-//     const { data: authListener } = supabase.auth.onAuthStateChange(
-//       (event, session) => {
-//         if (session?.user?.email_confirmed_at) {
-//           router.push("/onboarding");
-//         }
-//       }
-//     );
+  //   useEffect(() => {
+  //     // Check if user is already authenticated
+  //     const { data: authListener } = supabase.auth.onAuthStateChange(
+  //       (event, session) => {
+  //         if (session?.user?.email_confirmed_at) {
+  //           router.push("/onboarding");
+  //         }
+  //       }
+  //     );
 
-//     return () => {
-//       if (authListener && authListener.unsubscribe) {
-//         authListener.unsubscribe();
-//       }
-//     };
-//   }, [router]);
+  //     return () => {
+  //       if (authListener && authListener.unsubscribe) {
+  //         authListener.unsubscribe();
+  //       }
+  //     };
+  //   }, [router]);
 
   useEffect(() => {
     if (publicKey) {
       router.push("/");
     }
-  }, [publicKey]);
+  }, [publicKey, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -204,7 +204,7 @@ export default function Login() {
             </div>
 
             <span className="text-[12px] font-[500] leading-[14px] space-x-0 text-[#000000] dark:text-gray-400">
-              By continuing, you agree to SolUX’s 
+              By continuing, you agree to SolUX&apos;s 
               <span className="underline">Terms of Service</span> and{" "}
               <span className="underline">Policy Policy</span>.
             </span>
@@ -212,7 +212,7 @@ export default function Login() {
         </div>
 
         <span className="text-[14px] font-[500] leading-[14px] space-x-0 text-[#111111] text-inter dark:text-gray-400 mt-10">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <span
             className="cursor-pointer font-semibold"
             onClick={() => {

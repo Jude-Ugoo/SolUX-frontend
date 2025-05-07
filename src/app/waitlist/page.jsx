@@ -102,7 +102,7 @@ const WaitlistPage = () => {
           {success ? (
             <div className="flex flex-col justify-center items-center w-[80%] mx-auto">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-dm-sans leading-tight dark:text-white mb-7">
-                🎉 Yay,you’re in!
+                🎉 Yay,you&apos;re in!
               </h1>
               <p className="text-gray-600 dark:text-gray-300 font-Inter font-semibold text-sm sm:text-base px-2 sm:px-4 mb-7">
                 Thanks for joining the waitlist, we will notify you when we
@@ -178,7 +178,7 @@ const WaitlistPage = () => {
 
               {/* Description */}
               <p className="text-gray-600 dark:text-gray-300 font-Inter font-semibold font-inter text-sm sm:text-base px-2 sm:px-4 mb-5">
-                By joining our wait-list, you'll gain priority access to new
+                By joining our wait-list, you&apos;ll gain priority access to new
                 features, founding member benefits, and special offers before
                 anyone else.
               </p>
