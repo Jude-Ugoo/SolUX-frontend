@@ -43,7 +43,7 @@ export default function Verification() {
       } = await supabase.auth.getSession();
       if (session?.user?.email_confirmed_at) {
         setIsAuthenticated(true);
-        router.push("/onboarding");
+        router.push("/");
       }
     };
 
@@ -51,11 +51,11 @@ export default function Verification() {
   }, [router]);
 
   // Prevent direct access to verification page
-  useEffect(() => {
-    if (!userEmail && !isAuthenticated) {
-      router.push("/login");
-    }
-  }, [userEmail, isAuthenticated, router]);
+//   useEffect(() => {
+//     if (!userEmail && !isAuthenticated) {
+//       router.push("/login");
+//     }
+//   }, [userEmail, isAuthenticated, router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

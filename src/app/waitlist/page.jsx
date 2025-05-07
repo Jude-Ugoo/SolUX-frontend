@@ -99,16 +99,8 @@ const WaitlistPage = () => {
 
         <div className="max-w-2xl w-full space-y-6 sm:space-y-8 text-center px-4 sm:px-6">
           {/* Logo - adjusted size */}
-          <div className="flex justify-center">
-            <Image
-              src={logo_2}
-              alt="SolUX Logo"
-              className="w-36 sm:w-44 lg:w-52"
-            />
-          </div>
-
           {success ? (
-            <div className="flex flex-col justify-center w-[80%] mx-auto">
+            <div className="flex flex-col justify-center items-center w-[80%] mx-auto">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-dm-sans leading-tight dark:text-white mb-7">
                 🎉 Yay,you’re in!
               </h1>
@@ -157,7 +149,7 @@ const WaitlistPage = () => {
 
               <button
                 className="w-full mt-3 sm:mt-4 bg-[#002211] dark:bg-[#081a10] text-white py-3 sm:py-4 rounded-md font-semibold transition-colors text-base sm:text-lg hover:bg-opacity-90"
-                onClick={() => (window.location.href = "/contact")}
+                onClick={() => window.open("https://x.com/SolUX_er", "_blank")}
               >
                 Contact Us →
               </button>
@@ -202,9 +194,13 @@ const WaitlistPage = () => {
                     className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-md border border-gray-500 text-base sm:text-lg text-gray-500 placeholder:text-gray-500 outline-none bg-transparent dark:text-white dark:placeholder:text-gray-400"
                   />
                   <button
-                    className="w-full mt-3 sm:mt-4 bg-[#002211] dark:bg-[#081a10] text-white py-3 sm:py-4 rounded-md font-semibold transition-colors text-base sm:text-lg hover:bg-opacity-90"
+                    className={`w-full mt-3 sm:mt-4 bg-[#002211] dark:bg-[#081a10] text-white py-3 sm:py-4 rounded-md font-semibold transition-colors text-base sm:text-lg ${
+                      !email.trim() || loading
+                        ? "opacity-50 cursor-not-allowed"
+                        : "hover:bg-opacity-90"
+                    }`}
                     type="submit"
-                    disabled={loading}
+                    disabled={loading || !email.trim()}
                   >
                     {loading ? "Loading..." : "Join waitlist →"}
                   </button>

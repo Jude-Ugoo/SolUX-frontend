@@ -14,8 +14,8 @@ const Modal = ({ title, description, inputs, onSubmit, step }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex md:justify-center md:items-center justify-end flex-col">
-      <div className="bg-[#FAFAFA] rounded-t-[24px] rounded-b-none sm:rounded-md pb-8 sm:px-14 w-full sm:max-w-[650px] shadow-lg sm:my-0 mt-auto">
+    <div className="fixed inset-0 bg-black bg-opacity-50 px-2 pb-2 flex md:justify-center md:items-center justify-end flex-col">
+      <div className="bg-[#FAFAFA] rounded-lg sm:rounded-md pb-8 sm:px-14 w-full sm:max-w-[650px] shadow-lg sm:my-0 mt-auto">
         <div className="flex justify-center mb-4 mt-7">
           <Image
             src={logo_2}

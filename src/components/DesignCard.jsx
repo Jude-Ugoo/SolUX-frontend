@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -15,16 +15,16 @@ const DesignCard = ({ design }) => {
       >
         <div className="mt-3">
           <Image
-            className="w-full h-auto object-cover"
+            className="h-[400px] lg:w-full object-contain"
             alt={design.name}
             src={design.image}
-			wdth={300}
-			height={300}
+            // wdth={100}
+            // height={100}
           />
         </div>
       </div>
 
-	  <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 mt-2">
         {/* App Icon */}
         <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
           <Image
@@ -39,11 +39,15 @@ const DesignCard = ({ design }) => {
         {/* Name + Description */}
         <div className="flex flex-col">
           <h3 className="font-semibold text-gray-900">{design.name}</h3>
-          <p className="text-sm text-gray-700">{design.description}</p>
+          <p className="text-[12px] font-[500] leading-[14px] text-[#707070]">
+            {design.description}
+          </p>
+          <span className="bg-[#9786E426] text-center text-[10px] font-[500] font-inter text-[#000000] w-12">
+            {design.tag}
+          </span>
         </div>
       </div>
     </div>
   );
 };
-
 export default DesignCard;
