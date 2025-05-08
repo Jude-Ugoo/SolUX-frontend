@@ -11,6 +11,9 @@ import frame from "@/assets/waitlist/Frame.svg";
 // import { addToWaitlist } from "@/api/waitlistApi";
 import toast from "react-hot-toast";
 import { useTheme } from "next-themes";
+import image_1 from "@/assets/images/Shape_1.png";
+import image_2 from "@/assets/images/Shape_2.png";
+import image from "@/assets/images/Shape.png";
 
 import supabase from "@/utils/supabaseClient";
 
@@ -50,24 +53,29 @@ const WaitlistPage = () => {
   return (
     <main className="min-h-[100vh] lg:h-screen flex flex-col lg:flex-row justify-between items-center bg-white dark:bg-[#030103]">
       {/* Green banner - hidden on mobile and tablet */}
-      <div
-        className="hidden lg:flex w-full lg:w-1/2 h-[98%] flex-col items-center justify-between bg-gradient-to-b
-        from-green-950 to-black m-5 rounded-lg"
-      >
+      <div className="hidden lg:flex w-full lg:w-1/2 h-[98%] flex-col items-center justify-between bg-[#030103] m-5 rounded-lg border border-[#5C5A5A]">
         {/* Logo and Text */}
         <div className="text-center p-6 pt-60 rounded-lg">
-          <Image src={logo} alt="SolUX Logo" className="w-60 mx-auto mb-5" />
+          <Image
+            src={logo}
+            alt="SolUX Logo"
+            className="w-[269px] h-[243px] mx-auto mb-5 object-contain"
+          />
           <h1 className="text-white text-2xl font-medium px-28 font-dm-sans">
             Save hours of research, understand web3 design patterns, discover
             the interface of real life crypto apps quicker
           </h1>
         </div>
 
-        <Image src={frame} alt="frame" className="w-[70%] object-contain" />
+        <Image
+          src={frame}
+          alt="frame"
+          className="w-[296px] height-[129.25px] object-contain"
+        />
       </div>
 
       {/* Right section - full width on mobile and tablet */}
-      <div className="min-h-screen lg:h-screen flex flex-col items-center w-full lg:w-1/2 px-4 lg:px-8">
+      <div className="min-h-screen lg:h-screen flex flex-col flex-1 items-center w-full lg:w-1/2 px-4 lg:px-8">
         <div className="flex justify-between items-center w-full px-2 pt-5 lg:pt-16 mb-10">
           <Image
             src={logo}
@@ -97,10 +105,10 @@ const WaitlistPage = () => {
           </div>
         </div>
 
-        <div className="max-w-2xl w-full space-y-6 sm:space-y-8 text-center px-4 sm:px-6">
+        <div className="flex justify-center max-w-2xl w-full space-y-6 sm:space-y-8 text-center px-4 sm:px-6">
           {/* Logo - adjusted size */}
           {success ? (
-            <div className="flex flex-col justify-center items-center w-[80%] mx-auto">
+            <div className="flex flex-col justify-center items-center flex-1 w-full px-4">
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-dm-sans leading-tight dark:text-white mb-7">
                 🎉 Yay,you&apos;re in!
               </h1>
@@ -121,7 +129,7 @@ const WaitlistPage = () => {
                   </a>
 
                   <a
-                    href="/"
+                    href="_blank"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
@@ -140,7 +148,7 @@ const WaitlistPage = () => {
                 </div>
               </div>
 
-              <div className="border-b-2 mb-7"></div>
+              <div className="border border-[#ADADAD] mb-7"></div>
 
               <div className="font-dm-sans font-medium">
                 Building or own a web3 project? Get featured in our design
@@ -148,7 +156,7 @@ const WaitlistPage = () => {
               </div>
 
               <button
-                className="w-full mt-3 sm:mt-4 bg-[#002211] dark:bg-[#081a10] text-white py-3 sm:py-4 rounded-md font-semibold transition-colors text-base sm:text-lg hover:bg-opacity-90"
+                className="w-full mt-3 sm:mt-4 bg-[#121212] dark:bg-[#F5F5F5] text-white dark:text-[#121212] py-3 sm:py-4 rounded-md font-semibold transition-colors text-base sm:text-lg hover:bg-opacity-90"
                 onClick={() => window.open("https://x.com/SolUX_er", "_blank")}
               >
                 Contact Us →
@@ -157,7 +165,15 @@ const WaitlistPage = () => {
           ) : (
             <div>
               {/* Small label */}
-              <div className="inline-flex items-center gap-2 bg-[#002211] dark:bg-gray-900 text-white text-sm sm:text-base px-2 sm:px-3 py-1 rounded-md font-dm-sans">
+              <div className="flex justify-center mb-5">
+                <Image
+                  src={logo_2}
+                  alt="SolUX Logo"
+                  className="w-36 sm:w-44 lg:w-52"
+                />
+              </div>
+
+              <div className="inline-flex items-center gap-2 bg-[#121212] dark:bg-transparent border border-[#5C5A5A]  text-white text-sm sm:text-base px-2 sm:px-3 py-1 rounded-md font-dm-sans">
                 <div className="w-3 h-3 sm:w-4 sm:h-4 relative">
                   <Image
                     src={flame}
@@ -178,9 +194,9 @@ const WaitlistPage = () => {
 
               {/* Description */}
               <p className="text-gray-600 dark:text-gray-300 font-Inter font-semibold font-inter text-sm sm:text-base px-2 sm:px-4 mb-5">
-                By joining our wait-list, you&apos;ll gain priority access to new
-                features, founding member benefits, and special offers before
-                anyone else.
+                By joining our wait-list, you&apos;ll gain priority access to
+                new features, founding member benefits, and special offers
+                before anyone else.
               </p>
 
               {/* Form section - adjusted padding and size */}
@@ -194,7 +210,7 @@ const WaitlistPage = () => {
                     className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-md border border-gray-500 text-base sm:text-lg text-gray-500 placeholder:text-gray-500 outline-none bg-transparent dark:text-white dark:placeholder:text-gray-400"
                   />
                   <button
-                    className={`w-full mt-3 sm:mt-4 bg-[#002211] dark:bg-[#081a10] text-white py-3 sm:py-4 rounded-md font-semibold transition-colors text-base sm:text-lg ${
+                    className={`w-full mt-3 sm:mt-4 bg-[#121212] dark:bg-[#F5F5F5] text-white dark:text-[#121212] py-3 sm:py-4 rounded-md font-semibold transition-colors text-base sm:text-lg ${
                       !email.trim() || loading
                         ? "opacity-50 cursor-not-allowed"
                         : "hover:bg-opacity-90"
@@ -210,9 +226,23 @@ const WaitlistPage = () => {
               {/* Launch info */}
               <div className="flex items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                 <div className="flex -space-x-1.5 sm:-space-x-2">
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-200 dark:bg-gray-700"></div>
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-300 dark:bg-gray-600"></div>
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-400 dark:bg-gray-500"></div>
+                  <Image
+                    src={image}
+                    alt="Image 1"
+                    className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-200 dark:bg-gray-700 object-contain"
+                  />
+
+                  <Image
+                    src={image_1}
+                    alt="Image 2"
+                    className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-200 dark:bg-gray-700 object-contain"
+                  />
+
+                  <Image
+                    src={image_2}
+                    alt="Image 3"
+                    className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-200 dark:bg-gray-700 object-contain"
+                  />
                 </div>
                 <span>Launching Q2 2025</span>
                 <div className="flex gap-2">
@@ -224,13 +254,31 @@ const WaitlistPage = () => {
                   >
                     <Icons.twitter className="w-4 h-4 sm:w-5 sm:h-5" />
                   </a>
+
+                  <a
+                    href="_blank"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    <Icons.youtube className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </a>
+
+                  <a
+                    href="https://likkles-organization.gitbook.io/solux"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  >
+                    <Icons.gitbook className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </a>
                 </div>
               </div>
             </div>
           )}
         </div>
         {/* Blockchain Tags - Only visible on mobile and tablet */}
-        <div className="flex justify-center items-center relative w-full max-w-md mx-auto lg:hidden mt-16">
+        <div className="mt-auto w-full max-w-md mx-auto lg:hidden">
           <Image src={frame} alt="frame" className="w-[100%] object-contain" />
         </div>
       </div>
