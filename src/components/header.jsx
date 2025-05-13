@@ -232,6 +232,10 @@ const Header = ({ appPage }) => {
           </div>
 
           <div>
+            <Icons.community size={20} color="#667085" />
+          </div>
+
+          <div>
             <Icons.bookmark size={20} color="#667085" />
           </div>
 
