@@ -4,13 +4,32 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import logo_2 from "@/assets/images/solux_logo.png";
 import { useRouter } from "next/navigation";
+import supabase from "@/utils/supabaseClient";
+import toast from "react-hot-toast";
 
 const Modal = ({ title, description, inputs, onSubmit, step }) => {
   const [selectedOption, setSelectedOption] = useState(null);
+  // Add state for step 1 input fields
+  const [inputValues, setInputValues] = useState({
+    username: "",
+    role: "",
+    source: "",
+  });
+
+  const handleInputChange = (e, key) => {
+    setInputValues((prev) => ({
+      ...prev,
+      [key]: e.target.value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(e, selectedOption);
+    if (step === 1) {
+      onSubmit(e, inputValues);
+    } else {
+      onSubmit(e, { selectedOption: inputs[selectedOption]?.placeholder });
+    }
   };
 
   return (
@@ -30,14 +49,29 @@ const Modal = ({ title, description, inputs, onSubmit, step }) => {
 
         <form onSubmit={handleSubmit} className="space-y-3 px-4 md:px-8">
           {step === 1 ? (
-            inputs.map((input, index) => (
+            <>
               <input
-                key={index}
                 type="text"
-                placeholder={input.placeholder}
+                placeholder={inputs[0].placeholder}
+                value={inputValues.username}
+                onChange={(e) => handleInputChange(e, "username")}
                 className="w-full px-6 sm:px-6 py-4 sm:py-4 rounded-md h-[58px] bg-[#EAEAEA] text-[#999999] text-[16px] font-[400] leading-[16px] placeholder:text-[#999999] outline-none dark:text-white dark:placeholder:text-gray-400"
               />
-            ))
+              <input
+                type="text"
+                placeholder={inputs[1].placeholder}
+                value={inputValues.role}
+                onChange={(e) => handleInputChange(e, "role")}
+                className="w-full px-6 sm:px-6 py-4 sm:py-4 rounded-md h-[58px] bg-[#EAEAEA] text-[#999999] text-[16px] font-[400] leading-[16px] placeholder:text-[#999999] outline-none dark:text-white dark:placeholder:text-gray-400"
+              />
+              <input
+                type="text"
+                placeholder={inputs[2].placeholder}
+                value={inputValues.source}
+                onChange={(e) => handleInputChange(e, "source")}
+                className="w-full px-6 sm:px-6 py-4 sm:py-4 rounded-md h-[58px] bg-[#EAEAEA] text-[#999999] text-[16px] font-[400] leading-[16px] placeholder:text-[#999999] outline-none dark:text-white dark:placeholder:text-gray-400"
+              />
+            </>
           ) : (
             <div className="space-y-3">
               {inputs.map((option, index) => (
@@ -81,16 +115,85 @@ export default function Onboarding() {
   const router = useRouter();
   const [showModal, setShowModal] = useState(true);
   const [modalStep, setModalStep] = useState(1);
+  const [userData, setUserData] = useState({
+    username: "",
+    role: "",
+    source: "",
+    purpose: "",
+  });
+  const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleModalSubmit = (e, selectedOption) => {
+  useEffect(() => {
+    const getSession = async () => {
+      const { data: { session: supabaseSession } } = await supabase.auth.getSession();
+      setSession(supabaseSession);
+      
+      // Redirect if no session exists
+      if (!supabaseSession) {
+        router.push('/signup');
+      }
+    };
+
+    getSession();
+  }, [router]);
+
+  const updateUserProfile = async (profileData) => {
+    try {
+      setLoading(true);
+      
+      if (!session?.user?.id) {
+        throw new Error("No authenticated user found");
+      }
+      
+      // Update user metadata in auth.users
+      const { error: updateError } = await supabase.auth.updateUser({
+        data: {
+          username: profileData.username,
+          role: profileData.role,
+          source: profileData.source,
+          purpose: profileData.purpose,
+          onboarded: true,
+        }
+      });
+
+      if (updateError) throw updateError;
+      
+      toast.success("Profile updated successfully!");
+      return true;
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      toast.error("Failed to update profile");
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleModalSubmit = async (e, formData) => {
     e.preventDefault();
     if (modalStep === 1) {
+      setUserData((prev) => ({
+        ...prev,
+        username: formData.username,
+        role: formData.role,
+        source: formData.source,
+      }));
       setModalStep(2);
     } else {
+      const updatedUserData = {
+        ...userData,
+        purpose: formData.selectedOption,
+      };
+      
+      setUserData(updatedUserData);
       setShowModal(false);
-      // Here you can handle the selected option
-      console.log("Selected option:", selectedOption);
-      router.push("/"); // Or wherever you want to redirect after completion
+      
+      // Save user data to Supabase and redirect to home page
+      const success = await updateUserProfile(updatedUserData);
+      if (success) {
+        router.push("/");
+      }
     }
   };
 

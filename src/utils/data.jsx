@@ -13,6 +13,11 @@ import design11 from "@/assets/images/design11.mobile.png";
 import design12 from "@/assets/images/design12.png";
 import design13 from "@/assets/images/design13.png";
 import design14 from "@/assets/images/design14.mobile.png";
+import phantom from "@/assets/images/phantom.png";
+import solflare from "@/assets/images/solflare.png";
+import uniswap from "@/assets/images/uniswap.png";
+import zerion from "@/assets/images/zerion.png";
+import zerionn from "@/assets/images/zerionn.png";
 
 import birdeye from "@/assets/logos/birdeye.png";
 import bonk from "@/assets/logos/bonk.png";
@@ -23,8 +28,8 @@ import grass from "@/assets/logos/grass.png";
 import jupiter from "@/assets/logos/jupiter.png";
 import pack from "@/assets/logos/pack.png";
 import parcl from "@/assets/logos/parcl.png";
-import phantom from "@/assets/logos/phantom.png";
-import solflare from "@/assets/logos/solflare.png";
+import phantom_logo from "@/assets/logos/phantom.png";
+import solflare_logo from "@/assets/logos/solflare.png";
 import streamflow from "@/assets/logos/streamflow.png";
 import phoenix from "@/assets/logos/phoenix.png";
 
@@ -41,6 +46,12 @@ import onboarding10 from "@/assets/onboarding/onboarding10.png";
 import onboarding11 from "@/assets/onboarding/onboarding11.png";
 import onboarding12 from "@/assets/onboarding/onboarding12.png";
 import onboarding13 from "@/assets/onboarding/onboarding13.png";
+
+import phantomObrd1 from  "@/assets/images/phantom_obrd_1.png"
+import phantomObrd2 from  "@/assets/images/phantom_obrd_2.png"
+import phantomObrd3 from  "@/assets/images/phantom_obrd_3.png"
+import phantomObrd4 from  "@/assets/images/phantom_obrd_4.png"
+import phantomObrd5 from  "@/assets/images/phantom_obrd_5.png"
 
 import token1 from "@/assets/token/token1.png";
 import token2 from "@/assets/token/token2.png";
@@ -61,186 +72,65 @@ export const data = [
   {
     id: 1,
     name: "Solflare",
-    logo: solflare,
-    image: design1,
+    logo: solflare_logo,
+    image: solflare,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
   },
   {
     id: 2,
-    name: "Phoenix",
-    logo: phoenix,
-    image: design2,
+    name: "Phantom",
+    logo: phantom_logo,
+    image: phantom,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
   },
   {
     id: 3,
-    name: "Grass",
-    logo: grass,
-    image: design3,
+    name: "Zerion",
+    logo: zerion,
+    image: zerion,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
   },
   {
     id: 4,
-    name: "Phantom",
-    logo: phantom,
-    image: design4,
+    name: "Uniswap",
+    logo: uniswap,
+    image: uniswap,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
   },
   {
     id: 5,
-    name: "Drip",
-    logo: drip,
-    image: design5,
+    name: "Solflare",
+    logo: solflare,
+    image: solflare,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
   },
   {
     id: 6,
-    name: "Birdeye",
-    logo: birdeye,
-    image: design6,
+    name: "Phantom",
+    logo: phantom,
+    image: phantom,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
   },
   {
     id: 7,
-    name: "Parcl",
-    logo: parcl,
-    image: design7,
+    name: "Zerion",
+    logo: zerion,
+    image: zerion,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
   },
   {
     id: 8,
-    name: "Bonk",
-    logo: bonk,
-    image: design8,
+    name: "Uniswap",
+    logo: uniswap,
+    image: uniswap,
     description: "Friendly crypto wallet built for DeFi and NFTs",
-    tag: "solana",
-  },
-  {
-    id: 9,
-    name: "Dex",
-    logo: dex,
-    image: design9,
-    description: "Friendly crypto wallet built for DeFi and NFTs",
-    tag: "solana",
-  },
-  {
-    id: 10,
-    name: "Streamflow",
-    logo: streamflow,
-    image: design10,
-    description: "Friendly crypto wallet built for DeFi and NFTs",
-    tag: "solana",
-  },
-  {
-    id: 11,
-    name: "Jupiter",
-    logo: jupiter,
-    image: design11,
-    tag: "solana",
-  },
-  {
-    id: 12,
-    name: "Pack",
-    logo: pack,
-    image: design12,
-    tag: "solana",
-  },
-  {
-    id: 13,
-    name: "Divvy",
-    logo: divy,
-    image: design13,
-    tag: "solana",
-  },
-  {
-    id: 14,
-    name: "Samoyed Coin",
-    logo: phantom,
-    image: design14,
-    tag: "solana",
-  },
-  {
-    id: 15,
-    name: "Moonlana",
-    logo: phantom,
-    image: design1,
-    tag: "solana",
-  },
-  {
-    id: 16,
-    name: "Bitcoin Cat",
-    logo: jupiter,
-    image: design2,
-    tag: "solana",
-  },
-  {
-    id: 17,
-    name: "Magic Eden",
-    logo: phantom,
-    image: design3,
-    tag: "solana",
-  },
-  {
-    id: 18,
-    name: "SABER",
-    logo: phantom,
-    image: design4,
-    tag: "solana",
-  },
-  {
-    id: 19,
-    name: "Raydium",
-    logo: streamflow,
-    image: design5,
-    tag: "solana",
-  },
-  {
-    id: 20,
-    name: "Mercurial",
-    logo: solflare,
-    image: design6,
-    tag: "solana",
-  },
-  {
-    id: 21,
-    name: "Mango Markets",
-    logo: solflare,
-    image: design7,
-    tag: "solana",
-  },
-  {
-    id: 22,
-    name: "Serum",
-    logo: phoenix,
-    image: design8,
-    tag: "solana",
-  },
-  {
-    id: 23,
-    name: "Solana Beach",
-    logo: jupiter,
-    image: design9,
-    tag: "solana",
-  },
-  {
-    id: 24,
-    name: "Step Finance",
-    logo: phantom,
-    image: design10,
-    tag: "solana",
-  },
-  {
-    id: 25,
-    name: "Aurory",
-    logo: parcl,
-    image: design11,
     tag: "solana",
   },
 ];
@@ -278,7 +168,7 @@ export const appsDataMobile = [
   "Play to Earn Games",
 ];
 
-export const onboardingData = [
+export const solflareOnboardingData = [
   onboarding1,
   onboarding2,
   onboarding3,
@@ -293,6 +183,45 @@ export const onboardingData = [
   onboarding12,
   onboarding13,
 ];
+
+export const phantomOnboardingData = [
+  phantomObrd1,
+  phantomObrd2,
+  phantomObrd3,
+  phantomObrd4,
+  phantomObrd5
+];
+
+export const zerionOnboardingData = [
+  onboarding2,
+  onboarding4,
+  onboarding6,
+  onboarding8,
+  onboarding10,
+  onboarding12,
+];
+
+export const uniswapOnboardingData = [
+  onboarding1,
+  onboarding3,
+  onboarding5,
+  onboarding7,
+  onboarding9,
+  onboarding11,
+];
+
+// Map app IDs to their respective onboarding data
+export const appOnboardingMap = {
+  1: solflareOnboardingData, // Solflare
+  2: phantomOnboardingData, // Phantom
+  3: zerionOnboardingData, // Zerion
+  4: uniswapOnboardingData, // Uniswap
+  5: solflareOnboardingData, // Solflare (duplicate)
+  6: phantomOnboardingData, // Phantom (duplicate)
+  7: zerionOnboardingData, // Zerion (duplicate)
+  8: uniswapOnboardingData, // Uniswap (duplicate)
+};
+
 export const tokenData = [
   token1,
   token2,

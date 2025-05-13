@@ -12,7 +12,7 @@ const Chip = ({
   return (
     <div
       onClick={handleClick}
-      className={`rounded-full ${containerStyle} cursor-pointer flex items-center justify-center gap-2 p-2 font-[500] leading-[14px] ${
+      className={`rounded-full ${containerStyle} cursor-pointer flex items-center justify-center gap-2 p-3.5 font-[500] leading-[14px] hover:bg-[#FAFAFA] ${
         isActive ? "bg-[#121212]" : " border border-black-100"
       }`}
     >

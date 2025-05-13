@@ -24,20 +24,20 @@ export default function Signup() {
   const { theme, setTheme } = useTheme();
   const { publicKey } = useWallet();
 
-//   useEffect(() => {
-//     // Check if user is already authenticated
-//     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-//       if (session?.user?.email_confirmed_at) {
-//         router.push('/onboarding');
-//       }
-//     });
+  //   useEffect(() => {
+  //     // Check if user is already authenticated
+  //     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+  //       if (session?.user?.email_confirmed_at) {
+  //         router.push('/onboarding');
+  //       }
+  //     });
 
-//     return () => {
-//       if (authListener && authListener.unsubscribe) {
-//         authListener.unsubscribe();
-//       }
-//     };
-//   }, [router]);
+  //     return () => {
+  //       if (authListener && authListener.unsubscribe) {
+  //         authListener.unsubscribe();
+  //       }
+  //     };
+  //   }, [router]);
 
   useEffect(() => {
     if (publicKey) {
@@ -202,7 +202,11 @@ export default function Signup() {
                 />
 
                 <button
-                  className="w-full mt-3 sm:mt-4 bg-[#030103] dark:bg-[#030103] h-[58px] text-white py-3 sm:py-4 rounded-md font-sm transition-colors text-sm sm:text-lg hover:bg-opacity-90"
+                  className={`w-full mt-3 sm:mt-4 bg-[#030103] dark:bg-[#030103] h-[58px] text-white py-3 sm:py-4 rounded-md font-sm transition-colors text-sm sm:text-lg hover:bg-opacity-90 ${
+                    !email.trim() || loading
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-opacity-90"
+                  }`}
                   type="submit"
                   disabled={loading}
                 >

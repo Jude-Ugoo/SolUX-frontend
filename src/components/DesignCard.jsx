@@ -10,12 +10,12 @@ const DesignCard = ({ design }) => {
   return (
     <div className="flex flex-col rounded-xl">
       <div
-        onClick={() => router.push(`/design`)}
+        onClick={() => router.push(`/design?id=${design.id}`)}
         className="bg-[#FAFAFA] cursor-pointer rounded-xl flex items-center justify-center w-full py-6"
       >
-        <div className="mt-3">
+        <div className="mt-3 ">
           <Image
-            className="h-[400px] lg:w-full object-contain"
+            className="md:h-[600px] md:w-[384px] lg:w-full object-contain"
             alt={design.name}
             src={design.image}
             // wdth={100}
@@ -26,13 +26,13 @@ const DesignCard = ({ design }) => {
 
       <div className="flex items-center gap-3 mt-2">
         {/* App Icon */}
-        <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center overflow-hidden">
+        <div className="w-[65px] h-[65px] rounded-lg flex items-center justify-center overflow-hidden">
           <Image
-            src={design.icon}
+            src={design.logo}
             alt={`${design.name} Icon`}
-            width={40}
-            height={40}
-            className="object-contain"
+            width={100}
+            height={100}
+            objectFit="contain"
           />
         </div>
 

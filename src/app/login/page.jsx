@@ -21,29 +21,35 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
   const { publicKey } = useWallet();
 
-  //   useEffect(() => {
-  //     // Check if user is already authenticated
-  //     const { data: authListener } = supabase.auth.onAuthStateChange(
-  //       (event, session) => {
-  //         if (session?.user?.email_confirmed_at) {
-  //           router.push("/onboarding");
-  //         }
-  //       }
-  //     );
-
-  //     return () => {
-  //       if (authListener && authListener.unsubscribe) {
-  //         authListener.unsubscribe();
-  //       }
-  //     };
-  //   }, [router]);
-
   useEffect(() => {
-    if (publicKey) {
-      router.push("/");
-    }
+    // Check if user is already authenticated
+    const checkAuth = async () => {
+      setIsChecking(true);
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+
+        // If user is already authenticated with Supabase or has a wallet connected
+        if (session?.user || publicKey) {
+          router.push("/");
+        }
+      } catch (error) {
+        console.error("Error checking authentication:", error);
+      } finally {
+        setIsChecking(false);
+      }
+    };
+
+    // Add a delay to ensure wallet state is properly initialized
+    const timer = setTimeout(() => {
+      checkAuth();
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [publicKey, router]);
 
   const handleSubmit = async (e) => {
@@ -87,6 +93,15 @@ export default function Login() {
       toast.error("Failed to sign in with Google. Please try again.");
     }
   };
+
+  // Display loading state while checking authentication
+  if (isChecking) {
+    return (
+      <div className="w-full flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-black"></div>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-[100vh] lg:h-screen flex flex-col lg:flex-row justify-between items-center bg-white dark:bg-[#030103]">
@@ -192,9 +207,12 @@ export default function Login() {
                   placeholder="Your email address"
                   className="w-full px-4 sm:px-6 py-3 sm:py-4 rounded-md bg-[#EAEAEA] text-[#030103] text-base sm:text-lg h-[58px] placeholder:text-[#999999] outline-none dark:text-white dark:placeholder:text-gray-400"
                 />
-
                 <button
-                  className="w-full mt-3 sm:mt-4 bg-[#030103] dark:bg-[#030103] text-white py-3 sm:py-4 rounded-md h-[58px] font-sm transition-colors text-sm sm:text-lg hover:bg-opacity-90"
+                  className={`w-full mt-3 sm:mt-4 bg-[#030103] dark:bg-[#030103] h-[58px] text-white py-3 sm:py-4 rounded-md font-sm transition-colors text-sm sm:text-lg hover:bg-opacity-90 ${
+                    !email.trim() || loading
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:bg-opacity-90"
+                  }`}
                   type="submit"
                   disabled={loading}
                 >
@@ -204,7 +222,7 @@ export default function Login() {
             </div>
 
             <span className="text-[12px] font-[500] leading-[14px] space-x-0 text-[#000000] dark:text-gray-400">
-              By continuing, you agree to SolUX&apos;s 
+              By continuing, you agree to SolUX&apos;s
               <span className="underline">Terms of Service</span> and{" "}
               <span className="underline">Policy Policy</span>.
             </span>

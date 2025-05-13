@@ -693,4 +693,22 @@ export const Icons = {
       <line x1="3" y1="18" x2="21" y2="18"></line>
     </svg>
   ),
+
+  community: ({ color = "#141B34", size = 20, ...props }) => (
+<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_1130_4083)">
+<path d="M7.5 18.5V17.5C7.5 14.7386 9.73858 12.5 12.5 12.5C15.2614 12.5 17.5 14.7386 17.5 17.5V18.5" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1.5 18.5V17.5C1.5 15.8431 2.84315 14.5 4.5 14.5" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M23.5 18.5V17.5C23.5 15.8431 22.1569 14.5 20.5 14.5" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.5 12.5C14.1569 12.5 15.5 11.1569 15.5 9.5C15.5 7.84315 14.1569 6.5 12.5 6.5C10.8431 6.5 9.5 7.84315 9.5 9.5C9.5 11.1569 10.8431 12.5 12.5 12.5Z" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4.5 14.5C5.60457 14.5 6.5 13.6046 6.5 12.5C6.5 11.3954 5.60457 10.5 4.5 10.5C3.39543 10.5 2.5 11.3954 2.5 12.5C2.5 13.6046 3.39543 14.5 4.5 14.5Z" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.5 14.5C21.6046 14.5 22.5 13.6046 22.5 12.5C22.5 11.3954 21.6046 10.5 20.5 10.5C19.3954 10.5 18.5 11.3954 18.5 12.5C18.5 13.6046 19.3954 14.5 20.5 14.5Z" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_1130_4083">
+<rect width="24" height="24" fill="white" transform="translate(0.5 0.5)"/>
+</clipPath>
+</defs>
+</svg>
+  ),
 };

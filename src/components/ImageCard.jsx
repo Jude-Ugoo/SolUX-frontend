@@ -1,12 +1,22 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from "next/image";
+import React from "react";
 
-const ImageCard = ({image}) => {
+const ImageCard = ({ image }) => {
   return (
-    <div className='bg-gray-300 rounded-[6px] px-4 pt-1.5'>
-      <Image alt='image' src={image} width={0} height={0} className='rounded-[6px]' />
+    <div className="w-full h-auto rounded-lg overflow-hidden">
+      <Image
+        src={image}
+        alt="Onboarding Screen"
+        width={280}
+        height={600}
+        className="object-contain w-full h-auto max-w-full"
+        style={{
+          maxHeight: "calc(100vh - 200px)",
+        }}
+        sizes="(max-width: 640px) 180px, (max-width: 768px) 220px, (max-width: 1024px) 260px, 280px"
+      />
     </div>
-  )
-}
+  );
+};
 
-export default ImageCard
+export default ImageCard;

@@ -1,95 +1,177 @@
-import Filter from '@/components/Filter'
-import Hero from '@/components/Hero'
-import Header from '@/components/header'
-import Seperator from '@/components/seperator'
-import React from 'react'
-import logo from '@/assets/logos/solflare.png'
-import Image from 'next/image'
-import user1 from '@/assets/users/Ellipse 1.png'
-import user2 from '@/assets/users/Ellipse 2.png'
-import user3 from '@/assets/users/Ellipse 3.png'
-import VariantBtn from '@/components/Buttons/VariantBtn'
-import { Icons } from '@/components/Icons'
-import { onboardingData, tokenData } from '@/utils/data'
-import ImageCard from '@/components/ImageCard'
-import FooterNav from '@/components/FooterNav'
-import TogglePhone from '@/components/Buttons/TogglePhone'
-import FilterBtn from '@/components/Buttons/FilterBtn'
+"use client";
 
-
+import Filter from "@/components/Filter";
+import Hero from "@/components/Hero";
+import Header from "@/components/header";
+import Seperator from "@/components/seperator";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import user1 from "@/assets/users/Ellipse 1.png";
+import user2 from "@/assets/users/Ellipse 2.png";
+import user3 from "@/assets/users/Ellipse 3.png";
+import VariantBtn from "@/components/Buttons/VariantBtn";
+import { Icons } from "@/components/Icons";
+import {
+  onboardingData,
+  solflareOnboardingData,
+  tokenData,
+  data,
+  appOnboardingMap,
+} from "@/utils/data";
+import ImageCard from "@/components/ImageCard";
+import FooterNav from "@/components/FooterNav";
+import TogglePhone from "@/components/Buttons/TogglePhone";
+import FilterBtn from "@/components/Buttons/FilterBtn";
+import phantomBanner from "@/assets/images/phantom_banner.png";
+import { useSearchParams } from "next/navigation";
 
 const DesignPage = () => {
+  const [activeTab, setActiveTab] = useState("Apps");
+  const [designData, setDesignData] = useState(null);
+  const [onboardingScreens, setOnboardingScreens] = useState([]);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const designId = searchParams.get("id");
+    if (designId) {
+      const selectedDesign = data.find(
+        (item) => item.id === parseInt(designId)
+      );
+      if (selectedDesign) {
+        setDesignData(selectedDesign);
+        // Get the appropriate onboarding data for this design
+        const appOnboardingData =
+          appOnboardingMap[selectedDesign.id] || solflareOnboardingData;
+        setOnboardingScreens(appOnboardingData);
+      }
+    } else {
+      // Default to first item if no ID is provided
+      setDesignData(data[0]);
+      setOnboardingScreens(appOnboardingMap[1] || solflareOnboardingData);
+    }
+  }, [searchParams]);
+
+  const tabs = ["Apps", "Screens", "UI Elements", "Flows", "Case Study"];
+
+  if (!designData) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className='w-full bg-white min-h-[100vh]'>
+    <div className="w-full bg-white min-h-[100vh]">
       <Header appPage={true} />
       <Seperator />
-      <div className='w-full px-[5%] mt-4 mb-[400px]'>
-        <Filter />
-        <Hero />
-        <div>
-          <div className='bg-primary-300 rounded-3xl w-fit flex items-center justify-center py-3.5 px-6'>
-            <Image width={181} height={181} objectFit='contain' alt='logo' src={logo} />
-          </div>
-          <div className='w-[40%] my-8'>
-            <h3 className='text-6xl mb-6 font-semibold text-gray-700'>Solflare - Swap, Send and More</h3>
-            <p className='font-medium text-gray-700 text-2xl'>Solana software wallets that allows users to send, receive, stoe and securely stake SPL tokens. </p>
-          </div>
-          <div className='flex items-center gap-6'>
-            <div className='flex items-center'>
-              <Image alt='user1' objectFit='cover' src={user1} width={67} height={67} className='rounded-full' />
-              <Image alt='user2' objectFit='cover' src={user2} width={67} height={67} className='rounded-full -ml-4' />
-              <Image alt='user3' objectFit='cover' src={user3} width={67} height={67} className='rounded-full -ml-4' />
+
+      {/* Banner */}
+      <div className="w-full px-[5%] mt-6">
+        <div className="flex pl-5 bg-[#FAFAFA] h-[124px] rounded-[8px] mb-7">
+          {/* App Info */}
+          <div className="flex justify-center items-center gap-4">
+            <div className="w-[65px] h-[65px] rounded-2xl overflow-hidden flex items-center justify-center">
+              <Image
+                src={designData.logo}
+                alt={`${designData.name} Logo`}
+                width="100%"
+                height="100%"
+                objectFit="contain"
+              />
             </div>
-            <p className='text-gray-700 font-medium text-2xl'>Solflare.com Designers</p>
-          </div>
-          <div className='flex gap-4 mt-4'>
-            <VariantBtn title={'Save'} icon='bookmark' />
-            <VariantBtn title='Download' outline={true} icon={'download_01'} />
-            <VariantBtn title='Share' outline={true} icon={'share'} />
-          </div>
-          <div className='flex gap-4 my-12'>
-            <div className='flex w-[208px] h-[52px] justify-center items-center gap-2 py-0.5 rounded-2xl px-2 bg-gray-300'>
-              <Icons.dot />
-              <span>Screens</span>
+            <div className="items-center">
+              <h2 className="text-[14px] font-[500] text-[#121212] leading-[14px] font-inter">
+                {designData.name}
+              </h2>
+              <p className="text-[12px] text-[#707070] font-[500] leading-[14px] font-inter mt-1">
+                {designData.description}
+              </p>
+              <p className="text-[10px] font-[500] mt-1 text-[#707070] leading-[14px]">
+                {designData.tag} · Web3 wallet
+              </p>
             </div>
-            <div className='flex w-[208px] h-[52px] justify-center items-center gap-2 py-0.5 rounded-2xl px-2 border border-black-100'>
-              <Icons.dot />
-              <span>Videos</span>
-            </div>
-            <TogglePhone />
-            <FilterBtn />
+          </div>
+
+          <div className="flex flex-1 justify-end">
+            <Image
+              src={phantomBanner}
+              alt={`${designData.name} Banner`}
+              objectFit="contain"
+            />
           </div>
         </div>
-        <div className='mb-20'>
-          <h2 className='text-gray-700 font-semibold text-6xl flex items-center mb-8 gap-2'>
-            <Icons.dot size={26} />
-            ONBOARDING
-          </h2>
-          <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-            {
-              onboardingData.map((item, i) => (
-               <ImageCard key={item} image={item} />
-              ))
-            }
+
+        {/* Platform Info */}
+        <div className="flex flex-col mb-8">
+          <span className="text-[12px] text-[#707070] font-inter font-[500] leading-[14px] mb-2">
+            Platform
+          </span>
+          <span className="text-[20px] font-[600] font-inter leading-[16px] text-[#4f4f4f] mb-2">
+            {" "}
+            iOS, Android, Web{" "}
+          </span>
+          <div className="flex gap-3">
+            <div className="px-3.5 py-2 bg-[#121212] text-[#EDEDED] rounded-full text-[12px] font-[500] font-inter leading-[14px] text-center">
+              Save
+            </div>
+
+            <div className="px-3.5 py-2 border border-black-100 rounded-full text-[12px] font-[500] font-inter leading-[14px] text-center">
+              Rate
+            </div>
           </div>
         </div>
-        <div className='mb-20'>
-          <h2 className='text-gray-700 font-semibold text-6xl flex items-center mb-8 gap-2'>
-            <Icons.dot size={26} />
-            Token
+
+        <div className="flex flex-wrap lg:flex-nowrap items-center gap-3 mb-10">
+          {tabs.map((tab) => (
+            <div key={tab} className="flex items-center gap-2">
+              {tab === "Case Study" ? (
+                <>
+                  <span className="relative text-lg lg:text-[24px] font-medium lg:font-[500] leading-tight lg:leading-[32px] text-[#D1D1D1E7]">
+                    {tab}
+                  </span>
+                  <span className="text-[12px] text-[#707070]">
+                    Coming Soon
+                  </span>
+                </>
+              ) : (
+                <button
+                  onClick={() => setActiveTab(tab)}
+                  className={`relative text-lg lg:text-[24px] font-medium lg:font-[500] leading-tight lg:leading-[32px] ${
+                    activeTab === tab ? "text-[#4f4f4f]" : "text-[#D1D1D1E7]"
+                  }`}
+                >
+                  <span>{tab}</span>
+                  {activeTab === tab && (
+                    <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-[#4f4f4f]"></span>
+                  )}
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Onboarding Section */}
+        <div className="mb-4">
+          <h2 className="text-[#121212] font-[600] font-inter text-[20px] leading-[16px] mb-2 ">
+            Onboarding
           </h2>
-          <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-            {
-              tokenData.map((item, i) => (
-               <ImageCard key={item} image={item} />
-              ))
-            }
+          <span className="font-[inter] font-[500] text-[12px] leading-[14px] text-[#707070]">
+            {onboardingScreens.length} Screens
+          </span>
+        </div>
+
+        <div className="overflow-x-auto scrollbar-hide pb-4">
+          <div className="flex gap-2 sm:gap-3 md:gap-4 mb-10 w-max">
+            {onboardingScreens.map((item, i) => (
+              <div
+                key={i}
+                className="min-w-[140px] sm:min-w-[180px] md:min-w-[220px] lg:min-w-[260px] h-auto"
+              >
+                <ImageCard image={item} />
+              </div>
+            ))}
           </div>
         </div>
       </div>
-      <FooterNav />
     </div>
-  )
-}
+  );
+};
 
-export default DesignPage
+export default DesignPage;

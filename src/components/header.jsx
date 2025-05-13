@@ -20,16 +20,42 @@ const Header = ({ appPage }) => {
   const [showResources, setShowResources] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [session, setSession] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const { publicKey } = useWallet();
+  const { publicKey, disconnect } = useWallet();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      // Sign out from Supabase
+      await supabase.auth.signOut();
+      // Disconnect wallet
+      if (disconnect) {
+        await disconnect();
+      }
+      setIsAuthenticated(false);
+      // Redirect to home page
+      router.push("/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   useEffect(() => {
     // Check Supabase auth session
     const getSession = async () => {
-      const {
-        data: { session: supabaseSession },
-      } = await supabase.auth.getSession();
-      setSession(supabaseSession);
+      setIsLoading(true);
+      try {
+        const {
+          data: { session: supabaseSession },
+        } = await supabase.auth.getSession();
+        setSession(supabaseSession);
+        setIsAuthenticated(!!supabaseSession || !!publicKey);
+      } catch (error) {
+        console.error("Error getting session:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     getSession();
@@ -39,15 +65,35 @@ const Header = ({ appPage }) => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
+      setIsAuthenticated(!!session || !!publicKey);
     });
 
     return () => subscription?.unsubscribe();
-  }, []);
+  }, [publicKey]);
+
+  // Check for Solana wallet connection
+  useEffect(() => {
+    if (publicKey) {
+      setIsAuthenticated(true);
+    }
+  }, [publicKey]);
 
   // Close mobile menu when route changes
   useEffect(() => {
     setShowMobileMenu(false);
   }, [router]);
+
+  const getUserDisplayName = () => {
+    if (session?.user?.email) {
+      return session.user.email;
+    }
+
+    if (publicKey) {
+      return `@${publicKey.toBase58().slice(0, 8)}`;
+    }
+
+    return "User";
+  };
 
   return (
     <nav className="w-full flex flex-col lg:flex-row items-center justify-between px-4 lg:px-[4%] py-4 lg:py-6 relative">
@@ -73,18 +119,30 @@ const Header = ({ appPage }) => {
         {/* Menu and Avatar */}
         <div className="flex items-center gap-2">
           {/* Avatar or Login */}
-          {publicKey || session?.user ? (
-            <Image
-              className="rounded-full w-[32px] h-[32px] cursor-pointer"
-              width={32}
-              height={32}
-              src={Avatar}
-              alt="avatar"
-              onClick={() => setShowProfile(!showProfile)}
-            />
+          {isLoading ? (
+            <div className="w-8 h-8 rounded-full bg-gray-200 animate-pulse"></div>
+          ) : isAuthenticated ? (
+            <div className="relative">
+              <Image
+                className="rounded-full w-[32px] h-[32px] cursor-pointer"
+                width={32}
+                height={32}
+                src={Avatar}
+                alt="avatar"
+                onClick={() => setShowProfile(!showProfile)}
+              />
+              {showProfile && (
+                <div className="absolute right-0 top-full mt-2 z-50">
+                  <ProfileDropdown onLogout={handleLogout} />
+                </div>
+              )}
+            </div>
           ) : (
-            <button onClick={() => router.push("/login")} className="p-2">
-              Login
+            <button
+              onClick={() => router.push("/login")}
+              className="flex items-center gap-2 bg-[#121212] justify-center rounded-lg py-1.5 px-3 border border-gray-400 shadow-custom"
+            >
+              <span className="text-white font-semibold text-sm">Login</span>
             </button>
           )}
 
@@ -134,11 +192,11 @@ const Header = ({ appPage }) => {
         </div>
 
         <ul className="flex items-center justify-center gap-10 mt-1">
-          <li className="flex cursor-pointer items-center gap-2 text-[#121212] text-[22px] font-[500] leading-[32px] font-inter">
+          <li className="flex cursor-pointer items-center gap-2 text-[#121212] text-[24px] font-[500] leading-[32px] font-inter">
             <span>Product</span>
             <Icons.chevron_down />
           </li>
-          <li className="flex cursor-pointer items-center gap-2 text-[#121212] text-[22px] font-[500] leading-[32px] font-inter">
+          <li className="flex cursor-pointer items-center gap-2 text-[#121212] text-[24px] font-[500] leading-[32px] font-inter">
             <span>Reading</span>
             <Icons.chevron_down />
           </li>
@@ -154,10 +212,16 @@ const Header = ({ appPage }) => {
           </button>
 
           <div>
+            <Icons.community size={20} color="#667085" />
+          </div>
+
+          <div>
             <Icons.bookmark size={20} color="#667085" />
           </div>
 
-          {publicKey || session?.user ? (
+          {isLoading ? (
+            <div className="w-10 h-10 rounded-full bg-gray-200 animate-pulse"></div>
+          ) : isAuthenticated ? (
             <div className="cursor-pointer relative">
               <div
                 onClick={() => setShowProfile(!showProfile)}
@@ -171,11 +235,14 @@ const Header = ({ appPage }) => {
                   alt="avatar"
                 />
                 <span className="text-[10px] font-semibold text-black">
-                  {session?.user?.email ||
-                    `@${publicKey?.toBase58().slice(0, 8)}`}
+                  {getUserDisplayName()}
                 </span>
               </div>
-              {showProfile && <ProfileDropdown />}
+              {showProfile && (
+                <div className="absolute right-0 top-full mt-2 z-50">
+                  <ProfileDropdown onLogout={handleLogout} />
+                </div>
+              )}
             </div>
           ) : (
             <button
