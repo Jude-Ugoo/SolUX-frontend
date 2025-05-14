@@ -130,7 +130,11 @@ const Home = () => {
         </div>
       </div> */}
 
-      <WaitlistPage/>
+      {/* <WaitlistPage/> */}
+      <UIXGeneratorDeepseek />
+      {/* <UIXGeneratorDeepsite/> */}
+      {/* <UIXGeneratorHuggingFace/> */}
+      {/* <UIXGenerator/> */}
     </div>
   );
 };
