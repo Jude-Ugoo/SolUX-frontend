@@ -13,8 +13,8 @@ const openrouter = createOpenRouter({
 
 
 export async function POST(req) {
-  const { prompt } = await req.json();
-  console.log('Server: Received prompt for DeepSeek API:', prompt);
+  const { messages } = await req.json();
+  console.log('Server: Received messages for DeepSeek API:', messages);
 
   try {
     // const model = openrouter.chat('meta-llama/llama-3.1-405b-instruct')
@@ -23,9 +23,9 @@ export async function POST(req) {
 
     const { text } = await generateText({
       model: model,
-      system:
-      `You are an expert UI developer. Generate a complete HTML page based on the user's prompt. Return only the HTML code.`,
-      prompt,
+      // system:
+      // `You are an expert UI developer. Generate a complete HTML page based on the user's prompt. Return only the HTML code.`,
+      messages,
     });
     console.log('text?????', text);
     return new Response(JSON.stringify({ text }));
