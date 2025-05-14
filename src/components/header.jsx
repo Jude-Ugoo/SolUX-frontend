@@ -211,7 +211,7 @@ const Header = ({ appPage }) => {
             </span>
           </button>
 
-          <div>
+          <div onClick={() => router.push("/community")}>
             <Icons.community size={20} color="#667085" />
           </div>
 

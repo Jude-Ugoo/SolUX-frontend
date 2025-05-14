@@ -1,92 +1,91 @@
-"use client"
+"use client";
 
-import CommunityHero from '@/components/CommunityHero'
-import Filter from '@/components/Filter'
-import Header from '@/components/header'
-import Seperator from '@/components/seperator'
-import React, { useState } from 'react'
-import star from '@/assets/images/Star 2.png'
-import Image from 'next/image'
-import Chip from '@/components/chips'
-import FooterNav from '@/components/FooterNav'
-// import { Icons } from '@/components/Icons'
-import TogglePhone from '@/components/Buttons/TogglePhone'
-import FilterBtn from '@/components/Buttons/FilterBtn'
-import team1 from '@/assets/images/team1.png'
-import team2 from '@/assets/images/team2.png'
-import CommunityDesign from '@/components/communityTabs/CommunityDesign'
-import CaseStudies from '@/components/communityTabs/CaseStudies'
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import Header from "@/components/header";
 
+const collections = new Array(9).fill({
+  title: "Generate a wallet UI that explains seedphrase with...",
+  category: "Authentication Series",
+});
 
 const Community = () => {
-  const [active, setActive] = useState('Community Design')
+  const router = useRouter();
 
-  const renderTab = () => {
-    if (active === 'Community Design') {
-      return <CommunityDesign />
-    }
-    if (active === 'Case Studies') {
-      return <CaseStudies />
-    }
-    if (active === 'Market Place -Coming Soon') {
-      return <CommunityDesign />
-    }
-  }
   return (
-    <div className='w-full bg-white min-h-[100vh]'>
-      <Header appPage={true} />
-      <Seperator />
-      <div className='w-full px-[5%] mt-4'>
-        <Filter />
-      </div>
-      <CommunityHero />
-      <div className='w-full my-8 px-[5%]'>
-        <div className='bg-primary-100 flex items-center justify-between rounded-xl px-2.5 py-[53px]'>
-          <div className='flex gap-4 items-center'>
-            <div className='w-[70px] h-[70px]'>
-              <Image className='object-contain w-full h-full' src={star} alt='star' width={0} height={0} sizes='100vw'/> 
-            </div>
-            <p className='text-white text-[18px] font-bold'>SuperTeam is organizing a community hackathon for web3 designers. Want to participate? Find team-mates and start!</p>
-          </div>
-          <div className='flex items-center gap-4'>
-            <button className='bg-white rounded-[21px] text-sm font-medium text-black-100 px-[15px] py-3.5'>Register</button>
-            <p className='text-white underline font-semibold text-[15px]'>Learn about Super Team</p>
-          </div>
-        </div>
-        <div className='w-full mt-[50px] mb-10 flex gap-4'>
-          <Chip width={19} containerStyle={'rounded-[38px]'} size='text-[33px]' handleClick={() => setActive('Community Design')} title={'Community Design'} isActive={active === 'Community Design'}  />
-          <Chip width={19} containerStyle={'rounded-[38px]'} size='text-[33px]' handleClick={() => setActive('Case Studies')} title={'Case Studies'} isActive={active === 'Case Studies'}  />
-          <Chip width={19} containerStyle={'rounded-[38px]'} size='text-[33px]' handleClick={() => setActive('Market Place -Coming Soon')} title={'Market Place -Coming Soon'} isActive={active === 'Market Place -Coming Soon'} />
-        </div>
-        <div className='w-full flex justify-between items-center'>
-          {
-            active === 'Community Design' && <p className='text-gray-700 font-semibold text-2xl'>Browse community made designs</p>
-          }
-          {
-            active === 'Case Studies' && <p className='text-gray-700 font-semibold text-2xl'>Study crypto based Case Study</p>
-          }
-          <div className='flex gap-4'>
-            <FilterBtn />
-            <TogglePhone />
-          </div>
-        </div>
-        {renderTab()}
-        <p className='text-black text-4xl mb-8 font-semibold'>Community of your choice</p>
-        <div className='flex items-center justify-between gap-7 mb-[400px] w-full'>
-          <div className='h-[275px]  w-full'>
-            <Image className='object-cover rounded-[32px] w-full h-full' src={team1} alt='team1' width={0} height={0} />
-          </div>
-          <div className='h-[275px] w-full'>
-            <Image className='object-cover rounded-[32px] w-full h-full' src={team2} alt='team1' width={0} height={0} />
-          </div>
-          <div className='h-[275px] w-full'>
-            <Image className='object-cover rounded-[32px] w-full h-full' src={team1} alt='team1' width={0} height={0} />
-          </div>
-        </div>
-      </div>
-      <FooterNav />
-    </div>
-  )
-}
+    <div className="w-full select-none bg-white min-h-screen">
+      <Header/>
 
-export default Community
+      {/* Banner */}
+      <div className="relative w-full h-40 md:h-52 bg-gray-100 flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#030103] to-[#00FF94] opacity-10"></div>
+        <div className="text-center">
+          <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            From Prompt to Portfolio
+          </h1>
+          <p className="text-gray-600 text-sm md:text-base">
+            Monetize your design genius
+          </p>
+        </div>
+      </div>
+
+      {/* Page title */}
+      <div className="max-w-7xl mx-auto p-5">
+        <h2 className="text-2xl font-bold mb-2">Community collections</h2>
+        <p className="text-gray-600 mb-4">
+          Explore UI design made by prompt from the SolUX Community. Grab your
+          chance to be featured, submit your collections.
+        </p>
+
+        {/* Filter button */}
+        <div className="mb-6">
+          <Button className="border border-gray-300 bg-white text-black">
+            Filter
+          </Button>
+        </div>
+
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          {collections.map((item, idx) => (
+            <div
+              key={idx}
+              className="border rounded-xl overflow-hidden flex flex-col"
+            >
+              <div className="bg-gray-200 aspect-[4/3] flex items-center justify-center">
+                <div className="w-20 h-20 bg-white rounded-md border" />
+              </div>
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="font-semibold text-base mb-2 line-clamp-2">
+                  {item.title}
+                </h3>
+
+                <div className="flex gap-2 mt-auto mb-4">
+                  <Button
+                    variant="outline"
+                    className="border-gray-300 text-sm px-3"
+                  >
+                    Info
+                  </Button>
+                  <Button
+                    variant="default"
+                    className="bg-black text-white text-sm px-3"
+                  >
+                    Generate Variations
+                  </Button>
+                </div>
+
+                <div className="flex items-center gap-2 text-gray-500 text-xs">
+                  <div className="w-6 h-6 bg-gray-300 rounded-full" />
+                  <span>{item.category}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Community;
