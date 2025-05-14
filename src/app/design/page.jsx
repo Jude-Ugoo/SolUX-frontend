@@ -1,31 +1,15 @@
 "use client";
 
-import Filter from "@/components/Filter";
-import Hero from "@/components/Hero";
 import Header from "@/components/header";
 import Seperator from "@/components/seperator";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
-import user1 from "@/assets/users/Ellipse 1.png";
-import user2 from "@/assets/users/Ellipse 2.png";
-import user3 from "@/assets/users/Ellipse 3.png";
-import VariantBtn from "@/components/Buttons/VariantBtn";
-import { Icons } from "@/components/Icons";
-import {
-  onboardingData,
-  solflareOnboardingData,
-  tokenData,
-  data,
-  appOnboardingMap,
-} from "@/utils/data";
+import { solflareOnboardingData, data, appOnboardingMap } from "@/utils/data";
 import ImageCard from "@/components/ImageCard";
-import FooterNav from "@/components/FooterNav";
-import TogglePhone from "@/components/Buttons/TogglePhone";
-import FilterBtn from "@/components/Buttons/FilterBtn";
 import phantomBanner from "@/assets/images/phantom_banner.png";
 import { useSearchParams } from "next/navigation";
 
-const DesignPage = () => {
+const DesignPageContent = () => {
   const [activeTab, setActiveTab] = useState("Apps");
   const [designData, setDesignData] = useState(null);
   const [onboardingScreens, setOnboardingScreens] = useState([]);
@@ -171,6 +155,14 @@ const DesignPage = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const DesignPage = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DesignPageContent />
+    </Suspense>
   );
 };
 
