@@ -2,71 +2,73 @@
 
 import WaitlistPage from "./waitlist/page";
 import UIXGeneratorDeepseek from "./ui-generator-deepseek/page";
-// import DesignCard from "@/components/DesignCard";
-// import Filter from "@/components/Filter";
-// import { Icons } from "@/components/Icons";
-// import Chip from "@/components/chips";
-// import Register from "@/components/Register";
-// import Seperator from "@/components/seperator";
-// import { appsData, appsDataMobile, data } from "@/utils/data";
+import DesignCard from "@/components/DesignCard";
+import Filter from "@/components/Filter";
+import { Icons } from "@/components/Icons";
+import Chip from "@/components/chips";
+import Register from "@/components/Register";
+import Seperator from "@/components/seperator";
+import { appsData, appsDataMobile, data } from "@/utils/data";
 import React, { useState, useEffect } from "react";
-// import { useRouter } from "next/navigation";
-// import Header from "@/components/header";
-// import supabase from "@/utils/supabaseClient";
-// import { useWallet } from "@solana/wallet-adapter-react";
+import { useRouter } from "next/navigation";
+import Header from "@/components/header";
+import supabase from "@/utils/supabaseClient";
+import { useWallet } from "@solana/wallet-adapter-react";
+import UIBuilder from "./ui-builder/page";
+
 
 const Home = () => {
-//   const [activeApp, setActiveApp] = useState(appsData[0]);
-//   const [activeTab, setActiveTab] = useState("Apps");
-//   const router = useRouter();
-//   const { publicKey } = useWallet();
-//   const [isAuthenticated, setIsAuthenticated] = useState(false);
-//   const [isLoading, setIsLoading] = useState(true);
+  const [activeApp, setActiveApp] = useState(appsData[0]);
+  const [activeTab, setActiveTab] = useState("Apps");
+  const router = useRouter();
+  const { publicKey } = useWallet();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-//   useEffect(() => {
-//     const checkAuth = async () => {
-//       setIsLoading(true);
-//       try {
-//         const {
-//           data: { session },
-//         } = await supabase.auth.getSession();
+  useEffect(() => {
+    const checkAuth = async () => {
+      setIsLoading(true);
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
 
-//         if (session?.user || publicKey) {
-//           setIsAuthenticated(true);
-//           setIsLoading(false);
-//         } else {
-//           // Only redirect if we're sure there's no valid session or wallet connection
-//           setIsAuthenticated(false);
-//           router.push("/login");
-//         }
-//       } catch (error) {
-//         console.error("Error checking authentication:", error);
-//         setIsLoading(false);
-//       }
-//     };
+        if (session?.user || publicKey) {
+          setIsAuthenticated(true);
+          setIsLoading(false);
+        } else {
+          // Only redirect if we're sure there's no valid session or wallet connection
+          setIsAuthenticated(false);
+          router.push("/login");
+        }
+      } catch (error) {
+        console.error("Error checking authentication:", error);
+        setIsLoading(false);
+      }
+    };
 
-//     // Add a small delay to ensure wallet state is properly initialized
-//     const timer = setTimeout(() => {
-//       checkAuth();
-//     }, 500);
+    // Add a small delay to ensure wallet state is properly initialized
+    const timer = setTimeout(() => {
+      checkAuth();
+    }, 500);
 
-//     return () => clearTimeout(timer);
-//   }, [publicKey, router]);
+    return () => clearTimeout(timer);
+  }, [publicKey, router]);
 
-//   // Show loading state if still checking auth
-//   if (isLoading) {
-//     return (
-//       <div className="w-full flex items-center justify-center min-h-screen">
-//         <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-black"></div>
-//       </div>
-//     );
-//   }
+  // Show loading state if still checking auth
+  if (isLoading) {
+    return (
+      <div className="w-full flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-black"></div>
+      </div>
+    );
+  }
 
-//   const tabs = ["Apps", "Screens", "UI Elements", "Flows"];
+  const tabs = ["Apps", "Screens", "UI Elements", "Flows", "UI Builder"];
 
   return (
     <div className="w-full select-none bg-white min-h-[100vh]">
-      {/* <Header />
+      <Header />
       <div className="w-full px-4 lg:px-[5%] mt-4">
         <div className="w-full flex flex-col my-4 lg:my-[33px]">
           <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:gap-0">
@@ -77,7 +79,12 @@ const Home = () => {
               {tabs.map((tab) => (
                 <button
                   key={tab}
-                  onClick={() => setActiveTab(tab)}
+                  onClick={() => {
+                    setActiveTab(tab)
+                    if (tab === "UI Builder") {
+                      router.push("/ui-builder");
+                    }
+                  }}
                   className={`relative text-lg lg:text-[24px] font-medium lg:font-[500] leading-tight lg:leading-[32px] ${
                     activeTab === tab ? "text-[#4f4f4f]" : "text-[#D1D1D1E7]"
                   }`}
@@ -128,10 +135,11 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* <WaitlistPage/> */}
-      <UIXGeneratorDeepseek />
+      {/* <UIBuilder /> */}
+      {/* <UIXGeneratorDeepseek /> */}
       {/* <UIXGeneratorDeepsite/> */}
       {/* <UIXGeneratorHuggingFace/> */}
       {/* <UIXGenerator/> */}

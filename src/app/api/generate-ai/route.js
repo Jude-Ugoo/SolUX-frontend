@@ -1,7 +1,7 @@
 import { deepseek } from '@ai-sdk/deepseek';
 import { generateText } from 'ai';
 import { createOpenRouter } from '@openrouter/ai-sdk-provider';
-import { saveChat } from '@/app/tools/chat-store';
+// import { saveChat } from '@/app/tools/chat-store';
 
 
 // Allow streaming responses up to 30 seconds
@@ -45,7 +45,7 @@ export async function POST(req) {
       headers: { 'Content-Type': 'application/json' }
     });
   } catch (e) {
-    console.error('Server: Error in POST /api/deepseek (outer catch block):', e);
+    console.error('Server: Error in POST /api/generate-ai (outer catch block):', e);
     // Return a proper error response to the client
     return new Response(JSON.stringify({ error: 'Failed to initiate request with DeepSeek.', details: e instanceof Error ? e.message : String(e) }), {
       status: 500,
