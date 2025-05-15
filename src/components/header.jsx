@@ -116,6 +116,19 @@ const Header = ({ appPage }) => {
           <Search otherStyles="bg-[#F6F6F6] w-full" />
         </div>
 
+        <div className="flex gap-3">
+          <div
+            onClick={() => router.push("/community")}
+            className="cursor-pointer"
+          >
+            <Icons.community size={20} color="#667085" />
+          </div>
+
+          <div>
+            <Icons.bookmark size={20} color="#667085" />
+          </div>
+        </div>
+
         {/* Menu and Avatar */}
         <div className="flex items-center gap-2">
           {/* Avatar or Login */}
@@ -211,7 +224,10 @@ const Header = ({ appPage }) => {
             </span>
           </button>
 
-          <div onClick={() => router.push("/community")}>
+          <div
+            onClick={() => router.push("/community")}
+            className="cursor-pointer"
+          >
             <Icons.community size={20} color="#667085" />
           </div>
 
