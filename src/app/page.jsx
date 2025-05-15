@@ -1,7 +1,6 @@
 "use client";
 
 import WaitlistPage from "./waitlist/page";
-import UIXGeneratorDeepseek from "./ui-generator-deepseek/page";
 import DesignCard from "@/components/DesignCard";
 import Filter from "@/components/Filter";
 import { Icons } from "@/components/Icons";
@@ -139,10 +138,6 @@ const Home = () => {
 
       {/* <WaitlistPage/> */}
       {/* <UIBuilder /> */}
-      {/* <UIXGeneratorDeepseek /> */}
-      {/* <UIXGeneratorDeepsite/> */}
-      {/* <UIXGeneratorHuggingFace/> */}
-      {/* <UIXGenerator/> */}
     </div>
   );
 };
