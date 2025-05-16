@@ -220,7 +220,7 @@ const Header = ({ appPage }) => {
         <div className="flex items-center gap-6">
           <button className="flex items-center gap-2 bg-[#121212] justify-center rounded-full py-2.5 px-4 border shadow-custom">
             <span className="text-white font-[500] text-[12px] leading-[14px]">
-              Submit App
+              Refrence Library
             </span>
           </button>
 

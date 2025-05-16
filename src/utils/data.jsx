@@ -29,7 +29,9 @@ import jupiter from "@/assets/logos/jupiter.png";
 import pack from "@/assets/logos/pack.png";
 import parcl from "@/assets/logos/parcl.png";
 import phantom_logo from "@/assets/logos/phantom.png";
-import solflare_logo from "@/assets/logos/solflare.png";
+import solflare_logo from "@/assets/logos/solflare_logo.png";
+import zerion_logo from "@/assets/logos/zerion_logo.png";
+import uniswap_logo from "@/assets/logos/uniswap_logo.png";
 import streamflow from "@/assets/logos/streamflow.png";
 import phoenix from "@/assets/logos/phoenix.png";
 
@@ -47,11 +49,11 @@ import onboarding11 from "@/assets/onboarding/onboarding11.png";
 import onboarding12 from "@/assets/onboarding/onboarding12.png";
 import onboarding13 from "@/assets/onboarding/onboarding13.png";
 
-import phantomObrd1 from  "@/assets/images/phantom_obrd_1.png"
-import phantomObrd2 from  "@/assets/images/phantom_obrd_2.png"
-import phantomObrd3 from  "@/assets/images/phantom_obrd_3.png"
-import phantomObrd4 from  "@/assets/images/phantom_obrd_4.png"
-import phantomObrd5 from  "@/assets/images/phantom_obrd_5.png"
+import phantomObrd1 from "@/assets/images/phantom_obrd_1.png";
+import phantomObrd2 from "@/assets/images/phantom_obrd_2.png";
+import phantomObrd3 from "@/assets/images/phantom_obrd_3.png";
+import phantomObrd4 from "@/assets/images/phantom_obrd_4.png";
+import phantomObrd5 from "@/assets/images/phantom_obrd_5.png";
 
 import token1 from "@/assets/token/token1.png";
 import token2 from "@/assets/token/token2.png";
@@ -67,6 +69,21 @@ import tipCode from "@/assets/images/tipcode.svg";
 import blog1 from "@/assets/Resources/Image.png";
 import blog2 from "@/assets/Resources/Image (1).png";
 import blog3 from "@/assets/Resources/Image (2).png";
+
+// Import phantom transaction screens
+import phanTransScreen1 from "@/assets/images/phantom/phan_trans_screen_1.jpg";
+import phanTransScreen2 from "@/assets/images/phantom/phan_trans_screen_2.jpg";
+import phanTransScreen3 from "@/assets/images/phantom/phan_trans_screen_3.jpg";
+import phanTransScreen4 from "@/assets/images/phantom/phan_trans_screen_4.jpg";
+import phanTransScreen5 from "@/assets/images/phantom/phan_trans_screen_5.jpg";
+
+// Import phantom discovery screens
+import phanDiscoveryScreen1 from "@/assets/images/phantom/phan_discovery_screen_1.jpg";
+import phanDiscoveryScreen2 from "@/assets/images/phantom/phan_discovery_screen_2.jpg";
+import phanDiscoveryScreen3 from "@/assets/images/phantom/phan_discovery_screen_3.jpg";
+import phanDiscoveryScreen4 from "@/assets/images/phantom/phan_discovery_screen_4.jpg";
+import phanDiscoveryScreen5 from "@/assets/images/phantom/phan_discovery_screen_5.jpg";
+import phanDiscoveryScreen6 from "@/assets/images/phantom/phan_discovery_screen_6.jpg";
 
 export const data = [
   {
@@ -88,7 +105,7 @@ export const data = [
   {
     id: 3,
     name: "Zerion",
-    logo: zerion,
+    logo: zerion_logo,
     image: zerion,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
@@ -96,7 +113,7 @@ export const data = [
   {
     id: 4,
     name: "Uniswap",
-    logo: uniswap,
+    logo: uniswap_logo,
     image: uniswap,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
@@ -104,7 +121,7 @@ export const data = [
   {
     id: 5,
     name: "Solflare",
-    logo: solflare,
+    logo: solflare_logo,
     image: solflare,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
@@ -112,7 +129,7 @@ export const data = [
   {
     id: 6,
     name: "Phantom",
-    logo: phantom,
+    logo: phantom_logo,
     image: phantom,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
@@ -120,7 +137,7 @@ export const data = [
   {
     id: 7,
     name: "Zerion",
-    logo: zerion,
+    logo: zerion_logo,
     image: zerion,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
@@ -128,7 +145,7 @@ export const data = [
   {
     id: 8,
     name: "Uniswap",
-    logo: uniswap,
+    logo: uniswap_logo,
     image: uniswap,
     description: "Friendly crypto wallet built for DeFi and NFTs",
     tag: "solana",
@@ -189,7 +206,7 @@ export const phantomOnboardingData = [
   phantomObrd2,
   phantomObrd3,
   phantomObrd4,
-  phantomObrd5
+  phantomObrd5,
 ];
 
 export const zerionOnboardingData = [
@@ -208,6 +225,25 @@ export const uniswapOnboardingData = [
   onboarding7,
   onboarding9,
   onboarding11,
+];
+
+// Phantom transaction screens data
+export const phantomTransactionData = [
+  phanTransScreen1,
+  phanTransScreen2,
+  phanTransScreen3,
+  phanTransScreen4,
+  phanTransScreen5,
+];
+
+// Phantom discovery screens data
+export const phantomDiscoveryData = [
+  phanDiscoveryScreen1,
+  phanDiscoveryScreen2,
+  phanDiscoveryScreen3,
+  phanDiscoveryScreen4,
+  phanDiscoveryScreen5,
+  phanDiscoveryScreen6,
 ];
 
 // Map app IDs to their respective onboarding data

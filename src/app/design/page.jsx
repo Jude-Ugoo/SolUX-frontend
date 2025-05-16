@@ -4,7 +4,13 @@ import Header from "@/components/header";
 import Seperator from "@/components/seperator";
 import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
-import { solflareOnboardingData, data, appOnboardingMap } from "@/utils/data";
+import {
+  solflareOnboardingData,
+  data,
+  appOnboardingMap,
+  phantomTransactionData,
+  phantomDiscoveryData,
+} from "@/utils/data";
 import ImageCard from "@/components/ImageCard";
 import phantomBanner from "@/assets/images/phantom_banner.png";
 import { useSearchParams } from "next/navigation";
@@ -34,6 +40,9 @@ const DesignPageContent = () => {
       setOnboardingScreens(appOnboardingMap[1] || solflareOnboardingData);
     }
   }, [searchParams]);
+
+  // Check if current design is Phantom
+  const isPhantom = designData && (designData.id === 2 || designData.id === 6);
 
   const tabs = ["Apps", "Screens", "UI Elements", "Flows", "Case Study"];
 
@@ -132,27 +141,83 @@ const DesignPageContent = () => {
         </div>
 
         {/* Onboarding Section */}
-        <div className="mb-4">
-          <h2 className="text-[#121212] font-[600] font-inter text-[20px] leading-[16px] mb-2 ">
-            Onboarding
-          </h2>
-          <span className="font-[inter] font-[500] text-[12px] leading-[14px] text-[#707070]">
-            {onboardingScreens.length} Screens
-          </span>
-        </div>
+        <div>
+          <div className="mb-4">
+            <h2 className="text-[#121212] font-[600] font-inter text-[20px] leading-[16px] mb-2 ">
+              Onboarding
+            </h2>
+            <span className="font-[inter] font-[500] text-[12px] leading-[14px] text-[#707070]">
+              {onboardingScreens.length} Screens
+            </span>
+          </div>
 
-        <div className="overflow-x-auto scrollbar-hide pb-4">
-          <div className="flex gap-2 sm:gap-3 md:gap-4 mb-10 w-max">
-            {onboardingScreens.map((item, i) => (
-              <div
-                key={i}
-                className="min-w-[140px] sm:min-w-[180px] md:min-w-[220px] lg:min-w-[260px] h-auto"
-              >
-                <ImageCard image={item} />
-              </div>
-            ))}
+          <div className="overflow-x-auto scrollbar-hide pb-4">
+            <div className="flex gap-2 sm:gap-3 md:gap-4 mb-10 w-max">
+              {onboardingScreens.map((item, i) => (
+                <div
+                  key={i}
+                  className="min-w-[140px] sm:min-w-[180px] md:min-w-[220px] lg:min-w-[260px] h-auto"
+                >
+                  <ImageCard image={item} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+
+        {/* Transaction Section - Only show for Phantom */}
+        {isPhantom && (
+          <div>
+            <div className="mb-4">
+              <h2 className="text-[#121212] font-[600] font-inter text-[20px] leading-[16px] mb-2 ">
+                Transaction
+              </h2>
+              <span className="font-[inter] font-[500] text-[12px] leading-[14px] text-[#707070]">
+                {phantomTransactionData.length} Screens
+              </span>
+            </div>
+
+            <div className="overflow-x-auto scrollbar-hide pb-4">
+              <div className="flex gap-2 sm:gap-3 md:gap-4 mb-10 w-max">
+                {phantomTransactionData.map((item, i) => (
+                  <div
+                    key={i}
+                    className="min-w-[140px] sm:min-w-[180px] md:min-w-[220px] lg:min-w-[260px] h-auto"
+                  >
+                    <ImageCard image={item} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Discovery Section - Only show for Phantom */}
+        {isPhantom && (
+          <div>
+            <div className="mb-4">
+              <h2 className="text-[#121212] font-[600] font-inter text-[20px] leading-[16px] mb-2 ">
+                Discovery
+              </h2>
+              <span className="font-[inter] font-[500] text-[12px] leading-[14px] text-[#707070]">
+                {phantomDiscoveryData.length} Screens
+              </span>
+            </div>
+
+            <div className="overflow-x-auto scrollbar-hide pb-4">
+              <div className="flex gap-2 sm:gap-3 md:gap-4 mb-10 w-max">
+                {phantomDiscoveryData.map((item, i) => (
+                  <div
+                    key={i}
+                    className="min-w-[140px] sm:min-w-[180px] md:min-w-[220px] lg:min-w-[260px] h-auto"
+                  >
+                    <ImageCard image={item} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
