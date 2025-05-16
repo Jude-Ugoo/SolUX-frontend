@@ -1,7 +1,6 @@
 "use client";
 
 import WaitlistPage from "./waitlist/page";
-
 import DesignCard from "@/components/DesignCard";
 import Filter from "@/components/Filter";
 import { Icons } from "@/components/Icons";
@@ -14,6 +13,8 @@ import { useRouter } from "next/navigation";
 import Header from "@/components/header";
 import supabase from "@/utils/supabaseClient";
 import { useWallet } from "@solana/wallet-adapter-react";
+import UIBuilder from "./ui-builder/page";
+
 
 const Home = () => {
   const [activeApp, setActiveApp] = useState(appsData[0]);
@@ -62,7 +63,7 @@ const Home = () => {
     );
   }
 
-  const tabs = ["Apps", "Screens", "UI Elements", "Flows"];
+  const tabs = ["Apps", "Screens", "UI Elements", "Flows", "UI Builder"];
 
   return (
     <div className="w-full select-none bg-white min-h-[100vh]">
@@ -77,7 +78,12 @@ const Home = () => {
               {tabs.map((tab) => (
                 <button
                   key={tab}
-                  onClick={() => setActiveTab(tab)}
+                  onClick={() => {
+                    setActiveTab(tab)
+                    if (tab === "UI Builder") {
+                      router.push("/ui-builder");
+                    }
+                  }}
                   className={`relative text-lg lg:text-[24px] font-medium lg:font-[500] leading-tight lg:leading-[32px] ${
                     activeTab === tab ? "text-[#4f4f4f]" : "text-[#D1D1D1E7]"
                   }`}
@@ -131,6 +137,7 @@ const Home = () => {
       </div>
 
       {/* <WaitlistPage/> */}
+      {/* <UIBuilder /> */}
     </div>
   );
 };
