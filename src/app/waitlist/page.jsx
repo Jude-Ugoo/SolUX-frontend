@@ -129,7 +129,7 @@ const WaitlistPage = () => {
                   </a>
 
                   <a
-                    href="_blank"
+                    href="https://m.youtube.com/@solux_er"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
@@ -256,7 +256,7 @@ const WaitlistPage = () => {
                   </a>
 
                   <a
-                    href="_blank"
+                    href="https://m.youtube.com/@solux_er"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
