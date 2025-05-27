@@ -1,6 +1,6 @@
 "use client";
 
-import WaitlistPage from "./waitlist/page";
+// import WaitlistPage from "./waitlist/page";
 // import DesignCard from "@/components/DesignCard";
 // import Filter from "@/components/Filter";
 // import { Icons } from "@/components/Icons";
@@ -14,9 +14,30 @@ import WaitlistPage from "./waitlist/page";
 // import supabase from "@/utils/supabaseClient";
 // import { useWallet } from "@solana/wallet-adapter-react";
 // import UIBuilder from "./ui-builder/page";
+// import Editor from "@monaco-editor/react";
+// import classNames from "classnames";
+import AdvUIBuilder from "./adv-ui-builder/page";
+import { useLocalStorage } from "react-use";
+import { useState, useRef } from "react";
+import { defaultHTML } from "@/utils/consts";
+import UIBuilder from "./ui-builder/page";
+
+// to modify budget
+// https://console.cloud.google.com/billing/01935C-052445-B48CE1/budgets?inv=1&invt=Abx_kg&project=gen-lang-client-0141993342
+
+
+// export interface Auth {
+//   preferred_username: string;
+//   picture: string;
+//   name: string;
+//   isLocalUse?: boolean;
+// }
 
 
 const Home = () => {
+
+  // const editorRef = useRef(null);
+
 //   const [activeApp, setActiveApp] = useState(appsData[0]);
 //   const [activeTab, setActiveTab] = useState("Apps");
 //   const router = useRouter();
@@ -136,8 +157,9 @@ const Home = () => {
         </div>
       </div> */}
 
-      <WaitlistPage/>
-      {/* <UIBuilder /> */}
+      {/* <WaitlistPage/> */}
+
+      <UIBuilder />
     </div>
   );
 };
